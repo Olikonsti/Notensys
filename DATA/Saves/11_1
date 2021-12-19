@@ -1,0 +1,33 @@
+{
+    "subjects": [
+        "Newd",
+        "Newsss",
+        "Mathe",
+        "Neweee"
+    ],
+    "grades": {
+        "Mathe": {
+            "small": {
+                "ausfrage": 13,
+                "ex": 14
+            },
+            "big": {}
+        },
+        "Neweee": {
+            "small": {},
+            "big": {}
+        },
+        "Newd": {
+            "small": {
+                "": 2
+            },
+            "big": {}
+        },
+        "Newsss": {
+            "small": {
+                "": 4
+            },
+            "big": {}
+        }
+    }
+}

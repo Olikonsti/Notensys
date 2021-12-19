@@ -14,9 +14,24 @@ def bubble_sort(array, notensys, reversed=False, ):
         # shrinks because the remaining items have already been
         # sorted.
         for j in range(n - i - 1):
-            if notensys.calculate_average(array[j]) > notensys.calculate_average(array[j + 1]):
-                # If the item you're looking at is greater than its
-                # adjacent value, then swap them
+            if array[j] == "-" and notensys.calculate_average(array[j + 1]) > 0:
+                array[j], array[j + 1] = array[j + 1], array[j]
+
+                # Since you had to swap two elements,
+                # set the `already_sorted` flag to `False` so the
+                # algorithm doesn't finish prematurely
+                already_sorted = False
+            try:
+                if notensys.calculate_average(array[j]) > notensys.calculate_average(array[j + 1]):
+                    # If the item you're looking at is greater than its
+                    # adjacent value, then swap them
+                    array[j], array[j + 1] = array[j + 1], array[j]
+
+                    # Since you had to swap two elements,
+                    # set the `already_sorted` flag to `False` so the
+                    # algorithm doesn't finish prematurely
+                    already_sorted = False
+            except:
                 array[j], array[j + 1] = array[j + 1], array[j]
 
                 # Since you had to swap two elements,
@@ -29,7 +44,14 @@ def bubble_sort(array, notensys, reversed=False, ):
         if already_sorted:
             break
 
+
+
     if reversed:
         array.reverse()
+
+    for i in array.copy():
+        if notensys.calculate_average(i) == "   -":
+            array.remove(i)
+            array.append(i)
 
     return array
