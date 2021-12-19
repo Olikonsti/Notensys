@@ -1,5 +1,6 @@
 import os
 import tkinter.messagebox
+import json
 
 DATA_FOLDER = "DATA\Saves"
 
@@ -9,7 +10,7 @@ class SaveManager():
 
     def save(self, name, data):
         f = open(f"{DATA_FOLDER}/{name}", "w")
-        f.write(str(data))
+        f.write(str(json.dumps(data, indent=4)))
         f.close()
 
     def load(self, name):
