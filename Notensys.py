@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 class Notensys():
     def __init__(self):
-        self.version = "2.0"
+        self.version = "2.1"
         SplashScreen(self)
         self.save_manager = SaveManager(self)
         self.save = {
@@ -48,6 +48,12 @@ class Notensys():
         self.save["grades"]["New"] = {"small": {}, "big": {}}
 
         self.window.subject_overview.redraw()
+
+        for i in self.window.subject_overview.subjects_displayed:
+            if i.subject == "New":
+                i.select()
+
+
 
     def rem_subject(self, name):
         if name != None:

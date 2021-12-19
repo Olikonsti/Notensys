@@ -33,6 +33,11 @@ class Window(Tk):
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 
+        self.rechnung_erklaerung = LabelFrame(self.bottom_right_pane, text="Rechnung", height=100)
+        self.rechnung_erklaerung.pack(padx=5, pady=(0, 5), side=BOTTOM, fill=X)
+        self.text = Label(self.rechnung_erklaerung, text="(KL+GL)/2")
+        self.text.pack()
+
         self.protocol("WM_DELETE_WINDOW", self.notensys.save_year_exit)
 
         self.update()
