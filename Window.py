@@ -11,6 +11,7 @@ class Window(Tk):
         self.title("Notensys Übersicht")
         self.geometry("600x500")
         self.resizable(False, True)
+        self.iconbitmap("DATA/icon.ico")
 
         self.update()
         self.notensys.window = self

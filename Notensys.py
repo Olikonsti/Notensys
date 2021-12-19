@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 class Notensys():
     def __init__(self):
-        self.version = "dev_1.0"
+        self.version = "dev 1.1"
         SplashScreen(self)
         self.save_manager = SaveManager(self)
         self.save = {

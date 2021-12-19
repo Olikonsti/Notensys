@@ -8,6 +8,7 @@ class YearSelector(Tk):
         self.title("Jahr wählen")
         self.geometry("285x100")
         self.resizable(False, False)
+        self.iconbitmap("DATA/icon.ico")
 
         self.protocol("WM_DELETE_WINDOW", self.clean_exit)
 

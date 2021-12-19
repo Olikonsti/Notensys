@@ -10,6 +10,7 @@ class GradeEditor(Toplevel):
         self.notensys = notensys
         self.subject = subject
         self.resizable(False, False)
+        self.iconbitmap("DATA/icon.ico")
 
         self.geometry("500x700")
 
