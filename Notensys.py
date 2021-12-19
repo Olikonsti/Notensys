@@ -9,6 +9,7 @@ from tkinter import messagebox
 class Notensys():
     def __init__(self):
         self.version = "2.2"
+        self.version_date = "19.12.2021"
         SplashScreen(self)
         self.save_manager = SaveManager(self)
         self.save = {
@@ -33,10 +34,20 @@ class Notensys():
         self.window = Window(self)
         self.window.mainloop()
 
+    def open_year_selector(self):
+        self.year_selector = YearSelector(self)
+        self.selected_year = self.year_selector.get_selection()
+        self.save = self.save_manager.load(self.selected_year)
+        self.window = Window(self)
+
     def save_year_exit(self):
         print("Saving...")
         self.save_manager.save(self.selected_year, self.save)
         raise SystemExit
+
+    def save_year(self):
+        print("Saving...")
+        self.save_manager.save(self.selected_year, self.save)
 
 
     def add_subject(self):

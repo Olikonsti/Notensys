@@ -32,7 +32,7 @@ class SplashScreen(Tk):
 
 
 
-        self.after(500, self.ready)
+        self.after(50, self.ready)
 
         self.mainloop()
 

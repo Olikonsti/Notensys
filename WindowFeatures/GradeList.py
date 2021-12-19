@@ -54,12 +54,12 @@ class GradeList(LabelFrame):
         self.lf = LabelFrame(self.win, text="Notiz")
         self.name_entry = ttk.Entry(self.lf)
         self.name_entry.pack()
-        self.lf.pack(anchor=NW)
+        self.lf.pack(anchor=NW, padx=5, pady=(5, 0))
 
         self.lf = LabelFrame(self.win, text="Punkte")
         self.grade_entry = ttk.Entry(self.lf)
         self.grade_entry.pack()
-        self.lf.pack(anchor=NW)
+        self.lf.pack(anchor=NW, padx=5, pady=(5, 0))
 
         self.apply_btn = ttk.Button(self.win, text="Ok", command=self.apply)
         self.apply_btn.pack(anchor=NE)
