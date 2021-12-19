@@ -76,7 +76,7 @@ class Notensys():
         try:
             avg_small = grade_sum/grade_count
         except:
-            avg_small = 0
+            avg_small = -1
 
         avg_big = 0
         grade_sum = 0
@@ -87,10 +87,15 @@ class Notensys():
         try:
             avg_big = grade_sum / grade_count
         except:
-            avg_big = 0
+            avg_big = -1
 
         try:
-            avg = (avg_small + avg_big)/2
+            if avg_big == -1:
+                avg = avg_small
+            elif avg_small == -1:
+                avg = avg_big
+            else:
+                avg = (avg_small + avg_big)/2
         except:
             avg = "NA"
 
