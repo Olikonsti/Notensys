@@ -8,11 +8,12 @@ from WindowFeatures.GradeListElement import *
 
 class GradeList(LabelFrame):
     def __init__(self, parent, text, grades, subject, notensys, mode):
-        super().__init__(parent, text=text, height=200)
+        super().__init__(parent, text=text, height=100)
         self.parent = parent
         self.notensys = notensys
 
-        self.pack(fill=X, padx=5, pady=5)
+        self.pack(fill=BOTH, expand=True, padx=5, pady=5)
+        self.pack_propagate(False)
 
         self.items_displayed = []
         self.selected = None
@@ -27,8 +28,11 @@ class GradeList(LabelFrame):
         self.rem_btn.pack(side=LEFT)
 
 
-        self.scrollarea = VerticalScrolledFrame(self)
-        self.scrollarea.pack(fill=BOTH, expand=True)
+        self.scrollarea = VerticalScrolledFrame(self, height=100)
+        self.scrollarea.interior.config(height=100)
+        self.scrollarea.canvas.config(height=2000)
+        self.scrollarea.canvas.pack(side=LEFT, fill=BOTH)
+        self.scrollarea.pack(fill=BOTH)
 
         self.grades = notensys.save["grades"][subject][mode]
         for i in self.grades:

@@ -8,18 +8,24 @@ from tkinter import messagebox
 
 class Notensys():
     def __init__(self):
-        self.version = "dev 1.1"
+        self.version = "2.0"
         SplashScreen(self)
         self.save_manager = SaveManager(self)
         self.save = {
             "subjects": ["Mathe"],
             "grades": {
                 "Mathe": {
-                    "small": {"ausfrage": 3, "ex": 4},
+                    "small": {"ausfrage": 13, "ex": 14},
                     "big": {}
                 },
             }
         }
+
+        if len(self.save_manager.list_saves()) < 1:
+            self.save_manager.save("11_1", self.save)
+            self.save_manager.save("11_2", self.save)
+            self.save_manager.save("12_1", self.save)
+            self.save_manager.save("12_2", self.save)
 
         self.year_selector = YearSelector(self)
         self.selected_year = self.year_selector.get_selection()
@@ -91,11 +97,13 @@ class Notensys():
 
         try:
             if avg_big == -1:
-                avg = avg_small
+                avg = round(avg_small, 2)
             elif avg_small == -1:
-                avg = avg_big
+                avg = round(avg_big, 2)
             else:
-                avg = (avg_small + avg_big)/2
+                avg = round((avg_small + avg_big)/2, 2)
+            if avg_small == -1 and avg_big == -1:
+                avg = "   -"
         except:
             avg = "NA"
 

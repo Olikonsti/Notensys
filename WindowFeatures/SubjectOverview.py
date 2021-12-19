@@ -32,8 +32,13 @@ class SubjectOverview(LabelFrame):
         self.redraw()
 
     def redraw(self):
+        selected = self.selected
         for i in self.subjects_displayed:
             i.destroy()
         self.subjects_displayed.clear()
         for i in self.notensys.save["subjects"]:
             SubjectOverviewElement(self, i, self.notensys)
+        for i in self.subjects_displayed:
+            if selected != None:
+                if selected.subject == i.subject:
+                    i.select()

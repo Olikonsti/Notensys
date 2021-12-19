@@ -5,7 +5,7 @@ from WindowFeatures.ColorIndicator import *
 
 class GradeListElement(Frame):
     def __init__(self, parent, gradelist, grade_text, grade_points):
-        super().__init__(parent, highlightthickness=1)
+        super().__init__(parent, highlightthickness=1, width=300)
         self.selected = False
         self.grade_text = grade_text
         self.gradelist = gradelist

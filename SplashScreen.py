@@ -38,6 +38,7 @@ class SplashScreen(Tk):
 
     def ready(self):
         self.bind("<Key>", self.exit)
+        self.bind("<Button-1>", self.exit)
         self.bar.destroy()
         self.text.config(text="Press Any Key")
 

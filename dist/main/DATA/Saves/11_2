@@ -1,1 +1,0 @@
-{'subjects': ['Mathe', 'Englisch'], 'grades': {'Mathe': {'small': {'Ex1': 12, 'Ex2': 15}, 'big': {'Klausur1': 10}}, 'Englisch': {'small': {'Ex1': 15}, 'big': {}}}}

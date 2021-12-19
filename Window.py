@@ -10,8 +10,10 @@ class Window(Tk):
         self.notensys = notensys
         self.title("Notensys Übersicht")
         self.geometry("600x500")
-        self.resizable(False, True)
+        #self.resizable(False, True)
         self.iconbitmap("DATA/icon.ico")
+
+        self.active_grade_editor = None
 
         self.update()
         self.notensys.window = self
@@ -27,7 +29,8 @@ class Window(Tk):
         self.subject_attributes = SubjectAttributes(self.rightPane, self.notensys)
         self.subject_attributes.pack(fill=BOTH, expand=True)
 
-        self.bottom_right_pane = LabelFrame(self.rightPane, text="Optionen", width=300, height=1000)
+        self.bottom_right_pane = LabelFrame(self.rightPane, text="Leistungsnachweise", width=300, height=1000)
+        self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 
         self.protocol("WM_DELETE_WINDOW", self.notensys.save_year_exit)
