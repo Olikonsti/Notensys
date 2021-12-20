@@ -4,12 +4,13 @@ from Window import *
 from YearSelector import *
 from SplashScreen import *
 from tkinter import messagebox
+import os.path
 
 
 class Notensys():
     def __init__(self):
-        self.version = "3.0"
-        self.version_date = "19.12.2021"
+        self.version = "2.3"
+        self.version_date = "20.12.2021"
         SplashScreen(self)
         self.save_manager = SaveManager(self)
         self.save = {
@@ -27,6 +28,17 @@ class Notensys():
             self.save_manager.save("11_2", self.save)
             self.save_manager.save("12_1", self.save)
             self.save_manager.save("12_2", self.save)
+        """
+        # load settings file
+        if os.path.isfile('DATA/settings.txt'):
+            f = open("DATA/settings.txt")
+            print(f.read())
+            f.close()
+        else:
+            f = open("DATA/settings.txt", "w")
+            f.write("yeet")
+            f.close()
+        """
 
         self.year_selector = YearSelector(self)
         self.selected_year = self.year_selector.get_selection()

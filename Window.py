@@ -18,6 +18,7 @@ class Window(Tk):
         self.settings_instance = None
         self.active_grade_editor = None
 
+
         self.menubar = Menu(self)
         filemenu = Menu(self.menubar, tearoff=0)
         filemenu.add_command(label="Speichern", command=self.notensys.save_year)
@@ -27,7 +28,6 @@ class Window(Tk):
         self.menubar.add_cascade(label="Jahr ändern", command=self.change_year)
         self.menubar.add_cascade(label="Über Notensys", command=self.open_about)
         self.config(menu=self.menubar)
-
 
         self.update()
         self.notensys.window = self

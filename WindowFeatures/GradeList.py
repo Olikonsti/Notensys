@@ -46,6 +46,8 @@ class GradeList(LabelFrame):
 
     def add_dialog(self):
         self.win = Toplevel(self.parent)
+        self.win.grab_set()
+        self.win.focus_force()
         self.win.iconbitmap("DATA/icon.ico")
         self.win.title("Note hinzufügen")
         self.win.resizable(False, False)
