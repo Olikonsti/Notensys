@@ -2,19 +2,19 @@ import os
 import tkinter.messagebox
 import json
 
-DATA_FOLDER = "DATA\Saves"
 
 class SaveManager():
-    def __init__(self, notensys):
+    def __init__(self, notensys, savefolder):
         self.notensys = notensys
+        self.savefolder = savefolder
 
     def save(self, name, data):
-        f = open(f"{DATA_FOLDER}/{name}", "w")
+        f = open(f"{self.savefolder}/{name}", "w")
         f.write(str(json.dumps(data, indent=4)))
         f.close()
 
     def load(self, name):
-        f = open(f"{DATA_FOLDER}/{name}", "r")
+        f = open(f"{self.savefolder}/{name}", "r")
         data = f.read()
         f.close()
         try:
@@ -25,7 +25,7 @@ class SaveManager():
         return out_
 
     def open_folder(self):
-        os.startfile(DATA_FOLDER)
+        os.startfile(self.savefolder)
 
     def list_saves(self):
-        return os.listdir(DATA_FOLDER)
+        return os.listdir(self.savefolder)

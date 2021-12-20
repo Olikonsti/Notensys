@@ -1,5 +1,6 @@
 
 from SaveManager import *
+from SettingsSaveManager import *
 from Window import *
 from YearSelector import *
 from SplashScreen import *
@@ -9,10 +10,22 @@ import os.path
 
 class Notensys():
     def __init__(self):
-        self.version = "2.3"
+        self.version = "2.5"
         self.version_date = "20.12.2021"
         SplashScreen(self)
-        self.save_manager = SaveManager(self)
+
+        self.settings_save_manager = SettingsSaveManager(self)
+        self.settings_save = {}
+        for i in range(50):
+            self.settings_save[str(i)] = "UNDEFINED"
+        if len(self.settings_save_manager.list_saves()) < 1:
+            self.settings_save_manager.fill_default_settings(self)
+            self.settings_save_manager.save(self.settings_save)
+
+        self.settings_save = self.settings_save_manager.load()
+        self.settings_save_manager.check_values()
+
+        self.save_manager = SaveManager(self, self.settings_save["0"])
         self.save = {
             "subjects": ["Mathe"],
             "grades": {
@@ -28,17 +41,8 @@ class Notensys():
             self.save_manager.save("11_2", self.save)
             self.save_manager.save("12_1", self.save)
             self.save_manager.save("12_2", self.save)
-        """
-        # load settings file
-        if os.path.isfile('DATA/settings.txt'):
-            f = open("DATA/settings.txt")
-            print(f.read())
-            f.close()
-        else:
-            f = open("DATA/settings.txt", "w")
-            f.write("yeet")
-            f.close()
-        """
+
+
 
         self.year_selector = YearSelector(self)
         self.selected_year = self.year_selector.get_selection()

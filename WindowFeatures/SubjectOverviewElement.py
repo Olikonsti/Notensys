@@ -20,10 +20,10 @@ class SubjectOverviewElement(Frame):
         self.subject_name.pack(side=LEFT)
 
         self.color_indicator = ColorIndicator(self, points=notensys.calculate_average(subject))
-        self.color_indicator.place(x=100, y=2)
+        self.color_indicator.place(relx=0.4, y=2)
 
         self.point_average = Label(self, text=notensys.calculate_average(subject))
-        self.point_average.place(x=220, y=0)
+        self.point_average.place(relx=0.8, y=0)
 
         # bind select toggler
         self.bind("<Button-1>", self.toggle_select)
