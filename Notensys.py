@@ -10,7 +10,7 @@ import os.path
 
 class Notensys():
     def __init__(self):
-        self.version = "2.5"
+        self.version = "2.6"
         self.version_date = "22.12.2021"
         SplashScreen(self)
 
