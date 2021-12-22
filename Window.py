@@ -23,6 +23,7 @@ class Window(Tk):
         filemenu = Menu(self.menubar, tearoff=0)
         filemenu.add_command(label="Speichern", command=self.notensys.save_year)
         filemenu.add_command(label="Speichern & Beenden", command=self.notensys.save_year_exit)
+        filemenu.add_command(label="Ohne Speichern Beenden", command=self.notensys.exit_no_save)
         self.menubar.add_cascade(label="Datei", menu=filemenu)
         self.menubar.add_cascade(label="Einstellungen", command=self.open_settings)
         self.menubar.add_cascade(label="Jahr ändern", command=self.change_year)

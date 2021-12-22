@@ -9,7 +9,10 @@ class SettingsSaveManager():
     def __init__(self, notensys):
         self.notensys = notensys
 
-    def save(self, data):
+    def save(self, data=None):
+        if data == None:
+            data = self.notensys.settings_save
+        print("saving settings...")
         f = open(f"{DATA_FOLDER}/settings.txt", "w")
         f.write(str(json.dumps(data, indent=4)))
         f.close()

@@ -26,7 +26,7 @@ class SubjectOverview(LabelFrame):
 
         self.sort_methods = ["Alphabetisch", "0 - 15", "15 - 0"]
         self.sort_var = StringVar(self)
-        self.selector = ttk.OptionMenu(self.topbar, self.sort_var, self.sort_methods[0], *self.sort_methods, command=self.sort_subjects)
+        self.selector = ttk.OptionMenu(self.topbar, self.sort_var, self.notensys.settings_save["1"], *self.sort_methods, command=self.sort_subjects)
         self.selector.pack(side=LEFT)
 
 
@@ -36,16 +36,25 @@ class SubjectOverview(LabelFrame):
         self.scrollarea.pack(expand=True, fill=BOTH)
 
         self.pack(side=LEFT, fill=BOTH, expand=True, padx=(5, 0), pady=(0, 5))
+        self.sort_subjects(mode_=self.notensys.settings_save["1"])
 
-        self.sort_subjects()
-
-    def sort_subjects(self, event=None):
-        if self.sort_var.get() == "Alphabetically":
+    def sort_subjects(self, event=None, mode_=None):
+        mode = self.sort_var.get()
+        if mode_ != None:
+            mode = mode_
+        if mode == "Alphabetisch":
             self.notensys.save["subjects"] = sorted(self.notensys.save["subjects"])
-        elif self.sort_var.get() == "0 - 15":
+            self.notensys.settings_save["1"] = "Alphabetisch"
+            self.notensys.settings_save_manager.save()
+        elif mode == "0 - 15":
             bubble_sort(self.notensys.save["subjects"], notensys=self.notensys)
-        elif self.sort_var.get() == "15 - 0":
+            self.notensys.settings_save["1"] = "0 - 15"
+            self.notensys.settings_save_manager.save()
+        elif mode == "15 - 0":
+            self.notensys.settings_save["1"] = "15 - 0"
+            self.notensys.settings_save_manager.save()
             bubble_sort(self.notensys.save["subjects"], notensys=self.notensys, reversed=True)
+
         else:
             self.notensys.save["subjects"] = sorted(self.notensys.save["subjects"])
         self.redraw()

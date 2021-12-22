@@ -11,7 +11,7 @@ import os.path
 class Notensys():
     def __init__(self):
         self.version = "2.5"
-        self.version_date = "20.12.2021"
+        self.version_date = "22.12.2021"
         SplashScreen(self)
 
         self.settings_save_manager = SettingsSaveManager(self)
@@ -59,11 +59,16 @@ class Notensys():
     def save_year_exit(self):
         print("Saving...")
         self.save_manager.save(self.selected_year, self.save)
+        self.settings_save_manager.save()
+        raise SystemExit
+
+    def exit_no_save(self):
         raise SystemExit
 
     def save_year(self):
         print("Saving...")
         self.save_manager.save(self.selected_year, self.save)
+        self.settings_save_manager.save()
 
 
     def add_subject(self):

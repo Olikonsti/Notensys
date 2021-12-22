@@ -3,6 +3,15 @@ from tkinter import *
 import tkinter.ttk as ttk
 import shutil, os
 
+# settings dict map
+"""
+0:  Save path
+1:  sorting mode
+
+
+
+"""
+
 
 class Settings(Toplevel):
     def __init__(self, window):
@@ -35,7 +44,10 @@ class Settings(Toplevel):
 
     def check_values(self, notensys):
         # self.window.notensys.settings_save["0"]
-        pass
+        if notensys.settings_save["1"] == "UNDEFINED":
+            notensys.settings_save["1"] = "Alphabetically"
+
+        notensys.settings_save_manager.save(notensys.settings_save)
 
 
     def exit(self):
