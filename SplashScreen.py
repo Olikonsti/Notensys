@@ -15,8 +15,7 @@ class SplashScreen(Tk):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 
-        self.geometry(f"400x300+{int(screen_width/2)-200}+{int(screen_height/2)-150}")
-
+        self.geometry(f"600x300+{int(screen_width/2)-300}+{int(screen_height/2)-150}")
 
         self.text = Label(self, text="Notensys", font="System 30")
         self.text.pack(pady=10)

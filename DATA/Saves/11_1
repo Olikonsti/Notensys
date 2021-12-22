@@ -1,0 +1,14 @@
+{
+    "subjects": [
+        "Mathe"
+    ],
+    "grades": {
+        "Mathe": {
+            "small": {
+                "ex": 14,
+                "ausfrag": 1
+            },
+            "big": {}
+        }
+    }
+}

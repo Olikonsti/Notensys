@@ -27,6 +27,9 @@ class GradeList(LabelFrame):
         self.rem_btn = ttk.Button(self.topbar, text="-", width=4, command=self.rem_grade)
         self.rem_btn.pack(side=LEFT)
 
+        self.edit_btn = ttk.Button(self.topbar, text="Edit", width=4, command=self.edit_grade)
+        self.edit_btn.pack(side=LEFT)
+
 
         self.scrollarea = VerticalScrolledFrame(self, height=100)
         self.scrollarea.interior.config(height=100)
@@ -37,6 +40,44 @@ class GradeList(LabelFrame):
         self.grades = notensys.save["grades"][subject][mode]
         for i in self.grades:
             GradeListElement(self.scrollarea.interior, self, i, self.grades[i])
+
+    def edit_grade(self):
+        self.win = Toplevel(self.parent)
+        self.win.grab_set()
+        self.win.focus_force()
+        self.win.iconbitmap("DATA/icon.ico")
+        self.win.title("Note hinzufügen")
+        self.win.resizable(False, False)
+        self.win.geometry("300x120")
+
+        self.lf = LabelFrame(self.win, text="Notiz")
+        self.name_entry = ttk.Entry(self.lf)
+        self.name_entry.pack()
+        self.name_entry.insert(0, self.selected.grade_text)
+        self.lf.pack(anchor=NW, padx=5, pady=(5, 0))
+
+        self.lf = LabelFrame(self.win, text="Punkte")
+        self.grade_entry = ttk.Entry(self.lf)
+        self.grade_entry.pack()
+        self.grade_entry.insert(0, self.grades[self.selected.grade_text])
+        self.lf.pack(anchor=NW, padx=5, pady=(5, 0))
+
+        self.apply_btn = ttk.Button(self.win, text="Ok", command=self.apply_edit)
+        self.apply_btn.pack(anchor=NE)
+
+    def apply_edit(self):
+        if self.selected != None:
+            del self.grades[self.selected.grade_text]
+            self.selected = None
+        else:
+            return 0
+
+        if self.name_entry.get() not in self.grades and self.grade_entry.get().isnumeric():
+            self.grades[self.name_entry.get()] = int(self.grade_entry.get())
+            self.win.destroy()
+        else:
+            tkinter.messagebox.showinfo("Kann Objekt nicht erstellen", "Es existiert bereits ein Objekt mit dieser Notiz.")
+        self.redraw()
 
     def rem_grade(self):
         if self.selected != None:
