@@ -1,6 +1,6 @@
 from Notensys import *
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     Notensys()

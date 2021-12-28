@@ -42,6 +42,8 @@ class GradeList(LabelFrame):
             GradeListElement(self.scrollarea.interior, self, i, self.grades[i])
 
     def edit_grade(self):
+        if self.selected == None:
+            return 0
         self.win = Toplevel(self.parent)
         self.win.grab_set()
         self.win.focus_force()

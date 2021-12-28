@@ -25,6 +25,9 @@ class SubjectOverviewElement(Frame):
         self.point_average = Label(self, text=notensys.calculate_average(subject))
         self.point_average.place(relx=0.8, y=0)
 
+        #self.test = Label(self, text=6-(notensys.calculate_average(subject)/3))
+        #self.test.place(relx=0.2, y=0)
+
         # bind select toggler
         self.bind("<Button-1>", self.toggle_select)
         self.subject_name.bind("<Button-1>", self.toggle_select)
