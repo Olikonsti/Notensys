@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter.ttk as ttk
 from PIL import Image, ImageTk
 import webbrowser
-
+from tkdarktitle import *
 
 class About(Toplevel):
     def __init__(self, window):
@@ -12,6 +12,8 @@ class About(Toplevel):
         self.title("Über Notensys")
         self.geometry("300x400")
         self.resizable(False, False)
+        if window.notensys.dark:
+            dark_title_bar(self)
 
         self.window = window
 

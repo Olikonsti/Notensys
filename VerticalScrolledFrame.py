@@ -14,7 +14,7 @@ class VerticalScrolledFrame(ttk.Frame):
     * -- or write your own 'os' type check.
     * This comes from a different naming of the the scrollwheel 'button', on different systems.
     """
-    def __init__(self, parent, *args, **kw):
+    def __init__(self, parent, bg=None, fg=None, *args, **kw):
 
         # track changes to the canvas and frame width and sync them,
         # also updating the scrollbar
@@ -69,6 +69,9 @@ class VerticalScrolledFrame(ttk.Frame):
         self.canvas = canvas
         canvas.pack(side=LEFT, fill=BOTH, expand=TRUE)
         vscrollbar.config(command=canvas.yview)
+
+        if bg != None:
+            self.canvas.config(bg=bg)
 
         # reset the view
         canvas.xview_moveto(0)

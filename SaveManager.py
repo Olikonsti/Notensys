@@ -28,4 +28,8 @@ class SaveManager():
         os.startfile(self.savefolder)
 
     def list_saves(self):
-        return os.listdir(self.savefolder)
+        try:
+            return os.listdir(self.savefolder)
+        except Exception as e:
+            tkinter.messagebox.showerror("Error", str(e))
+            raise SystemExit

@@ -2,6 +2,8 @@ from tkinter import *
 import tkinter.ttk as ttk
 from Settings import *
 from About import *
+from tkdarktitle import *
+from TitleBarMenuItem import *
 
 from WindowFeatures.SubjectOverview import *
 from WindowFeatures.SubjectAttributes import *
@@ -11,44 +13,55 @@ class Window(Tk):
         super().__init__()
         self.notensys = notensys
         self.title("Notensys Übersicht")
-        self.geometry("600x500")
+        self.geometry("650x600")
+
+        self.style = ttk.Style(self)
+        if self.notensys.dark:
+            self.tk.call("source", "DATA/theme/sun-valley.tcl")
+            self.tk.call("set_theme", "dark")
+
+
+        if notensys.dark:
+            dark_title_bar(self)
         #self.resizable(False, True)
         self.iconbitmap("DATA/icon.ico")
         self.settings_open = False
         self.settings_instance = None
         self.active_grade_editor = None
+        self.config(bg=notensys.bg_color)
 
+        self.menubar_frame = Frame(self, height=22)
+        self.menubar_frame.pack_propagate(False)
+        self.menubar_frame.pack(side=TOP, fill=X)
 
-        self.menubar = Menu(self)
-        filemenu = Menu(self.menubar, tearoff=0)
+        self.file_menu_btn = TitleBarMenuItem(self.menubar_frame, notensys, "Datei")
+
+        filemenu = Menu(self.file_menu_btn, tearoff=0)
+        self.file_menu_btn["menu"] = filemenu
         filemenu.add_command(label="Speichern", command=self.notensys.save_year)
         filemenu.add_command(label="Speichern & Beenden", command=self.notensys.save_year_exit)
         filemenu.add_command(label="Ohne Speichern Beenden", command=self.notensys.exit_no_save)
-        self.menubar.add_cascade(label="Datei", menu=filemenu)
-        self.menubar.add_cascade(label="Einstellungen", command=self.open_settings)
-        self.menubar.add_cascade(label="Jahr ändern", command=self.change_year)
-        self.menubar.add_cascade(label="Über Notensys", command=self.open_about)
-        self.config(menu=self.menubar)
+
+        TitleBarItem(self.menubar_frame, notensys, "Einstellungen", self.open_settings)
+        TitleBarItem(self.menubar_frame, notensys, "Jahr ändern", self.change_year)
+        TitleBarItem(self.menubar_frame, notensys, "Über Notensys", self.open_about)
 
         self.update()
         self.notensys.window = self
 
-        self.topbar = Frame(self)
-        self.topbar.pack(fill=X)
-
         self.subject_overview = SubjectOverview(self, notensys)
 
-        self.rightPane = Frame(self, width=300)
+        self.rightPane = Frame(self, width=300, bg=notensys.bg_color)
         self.rightPane.pack(side=RIGHT, fill=Y, padx=5, pady=(0, 5))
 
         self.subject_attributes = SubjectAttributes(self.rightPane, self.notensys)
         self.subject_attributes.pack(fill=BOTH, expand=True)
 
-        self.bottom_right_pane = LabelFrame(self.rightPane, text="Leistungsnachweise", width=300, height=1000)
+        self.bottom_right_pane = LabelFrame(self.rightPane, text="Leistungsnachweise", width=300, height=1000, bg=notensys.bg_color, fg=notensys.text_color)
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 
-        self.rechnung_erklaerung = LabelFrame(self.bottom_right_pane, text="Rechnung", height=100)
+        self.rechnung_erklaerung = LabelFrame(self.bottom_right_pane, text="Rechnung", height=100, bg=notensys.bg_color, fg=notensys.text_color)
         self.rechnung_erklaerung.pack(padx=5, pady=(0, 5), side=BOTTOM, fill=X)
         self.text = Label(self.rechnung_erklaerung, text="(KL+GL)/2")
         self.text.pack()

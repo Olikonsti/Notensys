@@ -8,7 +8,7 @@ from WindowFeatures.GradeEditor import *
 
 class SubjectOverviewElement(Frame):
     def __init__(self, subject_overview, subject, notensys):
-        super().__init__(subject_overview.scrollarea.interior, highlightthickness=1, height=100)
+        super().__init__(subject_overview.scrollarea.interior, highlightthickness=1, height=25)
         self.selected = False
         self.notensys = notensys
         self.window = notensys.window
@@ -16,13 +16,13 @@ class SubjectOverviewElement(Frame):
         self.subject = subject
         self.subject_overview.subjects_displayed.append(self)
 
-        self.subject_name = Label(self, text=subject)
+        self.subject_name = Label(self, text=subject, fg=self.notensys.text_color)
         self.subject_name.pack(side=LEFT)
 
         self.color_indicator = ColorIndicator(self, points=notensys.calculate_average(subject))
         self.color_indicator.place(relx=0.4, y=2)
 
-        self.point_average = Label(self, text=notensys.calculate_average(subject))
+        self.point_average = Label(self, text=notensys.calculate_average(subject), fg=self.notensys.text_color)
         self.point_average.place(relx=0.8, y=0)
 
         #self.test = Label(self, text=6-(notensys.calculate_average(subject)/3))
@@ -54,9 +54,9 @@ class SubjectOverviewElement(Frame):
         self.subject_overview.selected = self
         self.selected = True
         self.editMenu(self.subject_attributes.interior,)
-        self.subject_name.config(bg="#D8E6F1")
-        self.point_average.config(bg="#D8E6F1")
-        self.config(bg="#D8E6F1", highlightbackground="#0078D4", highlightcolor="#0078D4", highlightthickness=1)
+        self.subject_name.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
+        self.point_average.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
+        self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color, highlightcolor=self.notensys.highlight_color, highlightthickness=1)
 
     def deselect(self):
         try:
@@ -69,9 +69,9 @@ class SubjectOverviewElement(Frame):
         except:
             pass
         self.selected = False
-        self.subject_name.config(bg="#F0F0F0")
-        self.point_average.config(bg="#F0F0F0")
-        self.config(bg="#F0F0F0", highlightbackground="#ABABAB", highlightcolor="#ABABAB")
+        self.subject_name.config(bg=self.notensys.bg_color)
+        self.point_average.config(bg=self.notensys.bg_color)
+        self.config(bg=self.notensys.bg_color, highlightbackground="#ABABAB", highlightcolor="#ABABAB")
 
     def editMenu(self, parent):
         self.name_entry = ttk.Entry(parent)

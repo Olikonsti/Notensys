@@ -2,6 +2,7 @@ import tkinter.messagebox
 from tkinter import *
 import tkinter.ttk as ttk
 import shutil, os
+from tkdarktitle import *
 
 # settings dict map
 """
@@ -24,6 +25,9 @@ class Settings(Toplevel):
         self.geometry("500x300")
         self.resizable(False, False)
 
+        if window.notensys.dark:
+            dark_title_bar(self)
+
         self.window = window
         self.window.settings_open = True
         self.window.settings_instance = self
@@ -39,6 +43,12 @@ class Settings(Toplevel):
         self.save_path_select.insert(0, self.settings_save["0"])
         label.pack(padx=5, pady=(5, 0), anchor=W)
 
+        self.dark_mode_var = IntVar()
+        self.dark_mode_var.set(self.window.notensys.dark)
+        self.dark_mode = ttk.Checkbutton(self, text="Dunkler Modus", style="Switch.TCheckbutton",
+                                          variable=self.dark_mode_var)
+        self.dark_mode.pack(anchor=W)
+
     def fill_default_settings(self, notensys):
         notensys.settings_save["0"] = "DATA/Saves"
 
@@ -46,6 +56,8 @@ class Settings(Toplevel):
         # self.window.notensys.settings_save["0"]
         if notensys.settings_save["1"] == "UNDEFINED":
             notensys.settings_save["1"] = "Alphabetically"
+        if notensys.settings_save["2"] == "UNDEFINED":
+            notensys.settings_save["2"] = "DARK"
 
         notensys.settings_save_manager.save(notensys.settings_save)
 
@@ -55,6 +67,15 @@ class Settings(Toplevel):
         self.window.settings_open = False
 
     def apply(self):
+        if self.dark_mode_var.get():
+            if self.settings_save["2"] == "LIGHT":
+                tkinter.messagebox.showinfo("Warnung", "Bitte starte das Programm neu!")
+            self.settings_save["2"] = "DARK"
+        else:
+            if self.settings_save["2"] == "DARK":
+                tkinter.messagebox.showinfo("Warnung", "Bitte starte das Programm neu!")
+            self.settings_save["2"] = "LIGHT"
+
         self.settings_save["0"] = self.save_path_select.get()
         if self.settings_save["0"] != self.window.notensys.settings_save["0"]:
 

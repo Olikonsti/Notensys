@@ -8,7 +8,7 @@ from WindowFeatures.SubjectOverviewElement import *
 
 class SubjectOverview(LabelFrame):
     def __init__(self, window, notensys):
-        super().__init__(window, text="Fächer", width=300)
+        super().__init__(window, text="Fächer", width=300, bg=notensys.bg_color, fg=notensys.text_color)
 
         self.subjects_displayed = []
         self.selected = None
@@ -19,15 +19,16 @@ class SubjectOverview(LabelFrame):
         self.topbar.pack(fill=X)
 
         self.add_btn = ttk.Button(self.topbar, text="+", width=4, command=notensys.add_subject)
-        self.add_btn.pack(side=LEFT)
+        self.add_btn.pack(side=LEFT, padx=3)
 
         self.rem_btn = ttk.Button(self.topbar, text="-", width=4, command=lambda: notensys.rem_subject(self.selected.subject))
-        self.rem_btn.pack(side=LEFT)
+        self.rem_btn.pack(side=LEFT, padx=3)
 
         self.sort_methods = ["Alphabetisch", "0 - 15", "15 - 0"]
         self.sort_var = StringVar(self)
         self.selector = ttk.OptionMenu(self.topbar, self.sort_var, self.notensys.settings_save["1"], *self.sort_methods, command=self.sort_subjects)
-        self.selector.pack(side=LEFT)
+        self.selector.pack(side=LEFT, padx=3)
+        self.selector["menu"].config(bg=notensys.bg_color, fg=notensys.text_color)
 
 
 

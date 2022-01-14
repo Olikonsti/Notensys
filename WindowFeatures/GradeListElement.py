@@ -5,19 +5,20 @@ from WindowFeatures.ColorIndicator import *
 
 class GradeListElement(Frame):
     def __init__(self, parent, gradelist, grade_text, grade_points):
-        super().__init__(parent, highlightthickness=1, width=300)
+        super().__init__(parent, highlightthickness=1, width=300, height=25)
         self.selected = False
         self.grade_text = grade_text
         self.gradelist = gradelist
+        self.notensys = self.gradelist.notensys
         self.gradelist.items_displayed.append(self)
 
-        self.notiz = Label(self, text=grade_text)
+        self.notiz = Label(self, text=grade_text, fg=self.notensys.text_color)
         self.notiz.pack(side=LEFT)
 
         self.color_indicator = ColorIndicator(self, points=grade_points)
         self.color_indicator.place(x=100, y=2)
 
-        self.points = Label(self, text=grade_points)
+        self.points = Label(self, text=grade_points, fg=self.notensys.text_color)
         self.points.place(x=220, y=0)
 
         self.pack(fill=X, pady=2)
@@ -42,14 +43,15 @@ class GradeListElement(Frame):
         self.selected = True
         self.gradelist.selected = self
 
-        self.notiz.config(bg="#D8E6F1")
-        self.points.config(bg="#D8E6F1")
-        self.config(bg="#D8E6F1", highlightbackground="#0078D4", highlightcolor="#0078D4", highlightthickness=1)
+        self.notiz.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
+        self.points.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
+        self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color,
+                    highlightcolor=self.notensys.highlight_color, highlightthickness=1)
 
     def deselect(self):
         self.gradelist.selected = None
         self.selected = False
-        self.notiz.config(bg="#F0F0F0")
-        self.points.config(bg="#F0F0F0")
-        self.config(bg="#F0F0F0", highlightbackground="#ABABAB", highlightcolor="#ABABAB")
+        self.notiz.config(bg=self.notensys.bg_color)
+        self.points.config(bg=self.notensys.bg_color)
+        self.config(bg=self.notensys.bg_color, highlightbackground="#ABABAB", highlightcolor="#ABABAB")
 

@@ -41,4 +41,8 @@ class SettingsSaveManager():
         os.startfile(DATA_FOLDER)
 
     def list_saves(self):
-        return os.listdir(DATA_FOLDER)
+        try:
+            return os.listdir(DATA_FOLDER)
+        except Exception as e:
+            tkinter.messagebox.showerror("Error", str(e))
+            raise SystemExit

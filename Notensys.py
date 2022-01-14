@@ -10,9 +10,12 @@ import os.path
 
 class Notensys():
     def __init__(self):
-        self.version = "3.0"
-        self.version_date = "28.12.2021"
-        SplashScreen(self)
+        self.version = "3.1"
+        self.version_date = "14.01.2022"
+        self.splash_screen = SplashScreen(self)
+        self.splash_screen.mainloop()
+
+    def continue_startup(self):
 
         self.settings_save_manager = SettingsSaveManager(self)
         self.settings_save = {}
@@ -24,6 +27,22 @@ class Notensys():
 
         self.settings_save = self.settings_save_manager.load()
         self.settings_save_manager.check_values()
+
+        if self.settings_save["2"] == "DARK":
+            self.dark = True
+            self.text_color = "#afb1b3"
+            self.bg_color = "#2b2b2b"
+            self.bg_select = "#3e3f41"
+            self.highlight_color = "#d4d6d9"
+        else:
+            self.dark = False
+            self.bg_color = "#f0f0f0"
+            self.bg_select = "#D8E6F1"
+            self.text_color = "#282828"
+            self.highlight_color = "#0078D4"
+
+
+
 
         self.save_manager = SaveManager(self, self.settings_save["0"])
         self.save = {
@@ -43,10 +62,12 @@ class Notensys():
             self.save_manager.save("12_2", self.save)
 
 
-
+        self.splash_screen.text.config(text="Waiting for selection")
         self.year_selector = YearSelector(self)
         self.selected_year = self.year_selector.get_selection()
         self.save = self.save_manager.load(self.selected_year)
+
+
         self.window = Window(self)
         self.window.mainloop()
 

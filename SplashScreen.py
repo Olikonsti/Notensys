@@ -15,23 +15,31 @@ class SplashScreen(Tk):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 
+        self.config(bg="#2b2b2b")
+
         self.geometry(f"600x300+{int(screen_width/2)-300}+{int(screen_height/2)-150}")
 
-        self.text = Label(self, text="Notensys", font="System 30")
+        self.text = Label(self, text="Notensys", font="System 30", bg="#2b2b2b", fg="#afb1b3")
         self.text.pack(pady=10)
 
-        self.text = Label(self, text=f"Version {self.notensys.version}", font="System 20")
+        self.text = Label(self, text=f"Version {self.notensys.version}", font="System 20", fg="#afb1b3", bg="#2b2b2b")
         self.text.pack(pady=10)
 
-        self.text = Label(self, text="Coded by Konstantin Ehmann", font="System 20")
+        self.text = Label(self, text="Coded by Konstantin Ehmann", font="System 20", fg="#afb1b3", bg="#2b2b2b")
         self.text.pack(pady=10)
 
-        self.text = Label(self, text="Checking for Updates...", font="System 30")
+        self.text = Label(self, text="Checking for Updates...", font="System 30", fg="#afb1b3", bg="#2b2b2b")
         self.text.pack(pady=10)
 
-        self.bar = ttk.Progressbar(self, orient=HORIZONTAL, mode="indeterminate", length=280, maximum=15)
+        s = ttk.Style(self)
+        s.theme_use('clam')
+        s.configure("Horizontal.TProgressbar", foreground='green', background='green', troughcolor="#2b2b2b")
+
+        self.bar = ttk.Progressbar(self, style="Horizontal.TProgressbar", orient=HORIZONTAL, mode="indeterminate", length=280, maximum=15)
         self.bar.pack(fill=X, padx=10)
         self.bar.start(70)
+
+
 
         self.update()
 
@@ -53,9 +61,7 @@ class SplashScreen(Tk):
             raise SystemExit
 
 
-        self.after(500, self.exit)
-
-        self.mainloop()
+        self.after(100, self.exit)
 
     def open_download(self, tag):
         webbrowser.open(f"https://github.com/Olikonsti/Notensys/releases/tag/{tag}")
@@ -67,4 +73,4 @@ class SplashScreen(Tk):
         self.text.config(text="Press Any Key")
 
     def exit(self, e=None):
-        self.destroy()
+        self.notensys.continue_startup()
