@@ -39,7 +39,10 @@ class YearSelector(Tk):
         self.mainloop()
 
     def exit(self):
-        self.notensys.splash_screen.destroy()
+        try:
+            self.notensys.splash_screen.destroy()
+        except:
+            pass
         self.destroy()
 
     def clean_exit(self):
