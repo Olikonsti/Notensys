@@ -10,8 +10,8 @@ import os.path
 
 class Notensys():
     def __init__(self):
-        self.version = "3.1"
-        self.version_date = "14.01.2022"
+        self.version = "3.2"
+        self.version_date = "15.01.2022"
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()
 

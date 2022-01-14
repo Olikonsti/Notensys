@@ -50,7 +50,7 @@ class GradeList(LabelFrame):
         self.win.iconbitmap("DATA/icon.ico")
         self.win.title("Note hinzufügen")
         self.win.resizable(False, False)
-        self.win.geometry("300x120")
+        self.win.geometry("250x170")
 
         self.lf = LabelFrame(self.win, text="Notiz")
         self.name_entry = ttk.Entry(self.lf)
@@ -94,8 +94,7 @@ class GradeList(LabelFrame):
         self.win.iconbitmap("DATA/icon.ico")
         self.win.title("Note hinzufügen")
         self.win.resizable(False, False)
-        self.win.geometry("300x120")
-
+        self.win.geometry("250x170")
         self.lf = LabelFrame(self.win, text="Notiz")
         self.name_entry = ttk.Entry(self.lf)
         self.name_entry.pack()
