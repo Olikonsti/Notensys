@@ -8,6 +8,9 @@ class About(Toplevel):
     def __init__(self, window):
         super().__init__(window)
 
+        if window.notensys.dark:
+            self.config(bg="#1c1c1c")
+
         self.iconbitmap("DATA/icon.ico")
         self.title("Über Notensys")
         self.geometry("300x400")
