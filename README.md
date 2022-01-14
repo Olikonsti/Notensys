@@ -9,4 +9,5 @@ a small program to organize all your grades in a visually pleasing way
 
  
 version dev_1.0 coded in 3 hrs
+dark theme: https://github.com/rdbende/Sun-Valley-ttk-theme
 
