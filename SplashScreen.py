@@ -1,3 +1,4 @@
+import os
 import time
 import tkinter.messagebox
 from tkinter import *
@@ -49,7 +50,7 @@ class SplashScreen(Tk):
             newest_version = response.json()["tag_name"]
             if float(newest_version) > float(notensys.version):
                 result = tkinter.messagebox.askquestion("Notensys Updater",
-                                                        f"Eine neue Version von Notensys ist verfügbar!\nDeine Version: {self.notensys.version}\nNeuste Version: {newest_version}\nDrücke ja zum öffnen der Download Seite")
+                                                        f"Eine neue Version von Notensys ist verfügbar!\nDeine Version: {self.notensys.version}\nNeuste Version: {newest_version}\nDrücke ja zum installieren der Version")
             else:
                 result = "no"
         except:
@@ -57,11 +58,26 @@ class SplashScreen(Tk):
             result = "no"
 
         if result == "yes":
-            self.open_download(newest_version)
+            url = f'https://github.com/Olikonsti/Notensys/releases/download/{newest_version}/NotensysInstaller_{newest_version}.exe'
+            d = self.display_info("Downloading .exe. Please wait...")
+            d.update()
+            r = requests.get(url, allow_redirects=True)
+            open('NS_update.exe', 'wb').write(r.content)
+            os.system("start NS_update.exe")
+            #self.open_download(newest_version)
             raise SystemExit
 
 
         self.after(100, self.exit)
+
+    def display_info(self, text):
+        a = Tk()
+        a.title("Notensys updater")
+        a.geometry("300x100")
+
+        Label(a, text=text, font="SegoeUI 13").pack(expand=True)
+
+        return a
 
     def open_download(self, tag):
         webbrowser.open(f"https://github.com/Olikonsti/Notensys/releases/tag/{tag}")

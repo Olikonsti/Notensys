@@ -1,3 +1,4 @@
+import tkinter.messagebox
 from tkinter import *
 import tkinter.ttk as ttk
 from tkdarktitle import *
@@ -11,8 +12,12 @@ class YearSelector(Tk):
 
         if notensys.dark:
             dark_title_bar(self)
-            self.tk.call("source", "DATA/theme/sun-valley.tcl")
-            self.tk.call("set_theme", "dark")
+            try:
+                self.tk.call("source", "DATA/theme/sun-valley.tcl")
+                self.tk.call("set_theme", "dark")
+            except Exception as e:
+                tkinter.messagebox.showerror("Error", f"Theme Loading Error: {e}")
+                raise SystemExit
 
         self.notensys = notensys
         self.title("Jahr wählen")

@@ -57,7 +57,7 @@ class Window(Tk):
         self.subject_attributes = SubjectAttributes(self.rightPane, self.notensys)
         self.subject_attributes.pack(fill=BOTH, expand=True)
 
-        self.bottom_right_pane = LabelFrame(self.rightPane, text="Leistungsnachweise", width=300, height=1000, bg=notensys.bg_color, fg=notensys.text_color)
+        self.bottom_right_pane = LabelFrame(self.rightPane, text="Leistungsnachweise", width=310, height=1000, bg=notensys.bg_color, fg=notensys.text_color)
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 

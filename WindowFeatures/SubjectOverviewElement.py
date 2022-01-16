@@ -8,7 +8,7 @@ from WindowFeatures.GradeEditor import *
 
 class SubjectOverviewElement(Frame):
     def __init__(self, subject_overview, subject, notensys):
-        super().__init__(subject_overview.scrollarea.interior, highlightthickness=1, height=25)
+        super().__init__(subject_overview.scrollarea.interior, highlightthickness=1)
         self.selected = False
         self.notensys = notensys
         self.window = notensys.window
@@ -20,7 +20,7 @@ class SubjectOverviewElement(Frame):
         self.subject_name.pack(side=LEFT)
 
         self.color_indicator = ColorIndicator(self, points=notensys.calculate_average(subject))
-        self.color_indicator.place(relx=0.4, y=2)
+        self.color_indicator.place(relx=0.4, rely=0.15)
 
         self.point_average = Label(self, text=notensys.calculate_average(subject), fg=self.notensys.text_color)
         self.point_average.place(relx=0.8, y=0)

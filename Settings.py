@@ -8,7 +8,7 @@ from tkdarktitle import *
 """
 0:  Save path
 1:  sorting mode
-
+2: Theme DARK/LIGHT
 
 
 """
@@ -34,7 +34,7 @@ class Settings(Toplevel):
 
         self.protocol("WM_DELETE_WINDOW", self.exit)
 
-        self.apply_btn = ttk.Button(self, text="Apply", command=self.apply)
+        self.apply_btn = ttk.Button(self, text="Übernehmen", command=self.apply)
         self.apply_btn.pack(side=BOTTOM, anchor=NE, padx=25, pady=15)
 
         label = LabelFrame(self, text="Jahr Speicherpfad")
