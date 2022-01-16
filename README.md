@@ -2,9 +2,9 @@
 
 a small program to organize all your grades in a visually pleasing way
 
-![Screenshot 2022-01-16 181925](https://user-images.githubusercontent.com/68354546/149670618-67a3ba78-2bc3-49e9-93d0-1afa9afa58e8.png)
+![Screenshot 2022-01-16 183718](https://user-images.githubusercontent.com/68354546/149671853-8ffa1198-3211-4462-8aed-8f75234cf331.png)
 
-![image](https://user-images.githubusercontent.com/68354546/147151241-e5eed8b6-4488-4b21-872a-e9af4ade9551.png)
+![Screenshot 2022-01-16 185645](https://user-images.githubusercontent.com/68354546/149671855-d4380eba-a4fd-481b-a8ef-23d67d4e073a.png)
 
  
 version dev_1.0 coded in 3 hrs
