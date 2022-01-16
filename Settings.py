@@ -19,14 +19,14 @@ class Settings(Toplevel):
         super().__init__(window)
 
         self.settings_save = window.notensys.settings_save.copy()
-
-        self.iconbitmap("DATA/icon.ico")
-        self.title("Notensys Einstellungen")
-        self.geometry("500x300")
         self.resizable(False, False)
 
         if window.notensys.dark:
             dark_title_bar(self)
+
+        self.geometry("500x300")
+        self.iconbitmap("DATA/icon.ico")
+        self.title("Notensys Einstellungen")
 
         self.window = window
         self.window.settings_open = True
@@ -37,7 +37,7 @@ class Settings(Toplevel):
         self.apply_btn = ttk.Button(self, text="Übernehmen", command=self.apply)
         self.apply_btn.pack(side=BOTTOM, anchor=NE, padx=25, pady=15)
 
-        label = LabelFrame(self, text="Jahr Speicherpfad")
+        label = ttk.LabelFrame(self, text="Jahr Speicherpfad")
         self.save_path_select = ttk.Entry(label, width=60)
         self.save_path_select.pack()
         self.save_path_select.insert(0, self.settings_save["0"])

@@ -10,7 +10,7 @@ import os.path
 
 class Notensys():
     def __init__(self):
-        self.version = "3.3"
+        self.version = "3.4"
         self.version_date = "16.01.2022"
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()
@@ -31,15 +31,17 @@ class Notensys():
         if self.settings_save["2"] == "DARK":
             self.dark = True
             self.text_color = "#afb1b3"
-            self.bg_color = "#2b2b2b"
-            self.bg_select = "#3e3f41"
-            self.highlight_color = "#d4d6d9"
+            self.bg_color = "#1C1C1C"
+            self.bg_select = "#2b2b2b"
+            self.highlight_color = "#3e3f41"
+            self.highlight_color_selected = "#3e3f41"
         else:
             self.dark = False
             self.bg_color = "#f0f0f0"
             self.bg_select = "#D8E6F1"
             self.text_color = "#282828"
-            self.highlight_color = "#0078D4"
+            self.highlight_color = "#ababab"
+            self.highlight_color_selected = "#0078d4"
 
 
 

@@ -11,12 +11,14 @@ class About(Toplevel):
         if window.notensys.dark:
             self.config(bg="#1c1c1c")
 
-        self.iconbitmap("DATA/icon.ico")
-        self.title("Über Notensys")
-        self.geometry("300x400")
         self.resizable(False, False)
         if window.notensys.dark:
             dark_title_bar(self)
+
+        self.iconbitmap("DATA/icon.ico")
+        self.title("Über Notensys")
+        self.geometry("300x400")
+
 
         self.window = window
 

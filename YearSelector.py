@@ -6,8 +6,12 @@ from tkdarktitle import *
 class YearSelector(Tk):
     def __init__(self, notensys):
         super().__init__()
+        self.iconbitmap("DATA/icon.ico")
         if notensys.dark:
             self.config(bg="#1c1c1c")
+            ui_load_label = Label(self, text="UI und Speicherdateien Laden...", bg="#1c1c1c", font="SegoeUI 14", fg="#F0F0F0")
+            ui_load_label.pack(expand=True, padx=30, pady=30)
+            self.update()
         self.notensys = notensys
 
         if notensys.dark:
@@ -24,9 +28,13 @@ class YearSelector(Tk):
         self.geometry("300x100")
         #self.resizable(False, False)
 
-        self.iconbitmap("DATA/icon.ico")
 
         self.protocol("WM_DELETE_WINDOW", self.clean_exit)
+        try:
+            ui_load_label.config(text="Speicherdateien überprüfen...")
+        except:
+            pass
+
 
         self.years = self.notensys.save_manager.list_saves()
         self.option_var = StringVar(self)
@@ -38,6 +46,11 @@ class YearSelector(Tk):
 
         self.open_folder_btn = ttk.Button(self, text="Ordner öffnen", command=self.notensys.save_manager.open_folder)
         self.open_folder_btn.pack(side=RIGHT, anchor=SW, padx=(10, 0), pady=(0, 10))
+
+        try:
+            ui_load_label.destroy()
+        except:
+            pass
 
 
 

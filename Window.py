@@ -1,9 +1,7 @@
-from tkinter import *
-import tkinter.ttk as ttk
 from Settings import *
 from About import *
 from tkdarktitle import *
-from TitleBarMenuItem import *
+from WindowFeatures.TitleBarMenuItem import *
 
 from WindowFeatures.SubjectOverview import *
 from WindowFeatures.SubjectAttributes import *
@@ -20,7 +18,6 @@ class Window(Tk):
             self.tk.call("source", "DATA/theme/sun-valley.tcl")
             self.tk.call("set_theme", "dark")
 
-
         if notensys.dark:
             dark_title_bar(self)
         #self.resizable(False, True)
@@ -28,7 +25,6 @@ class Window(Tk):
         self.settings_open = False
         self.settings_instance = None
         self.active_grade_editor = None
-        self.config(bg=notensys.bg_color)
 
         self.menubar_frame = Frame(self, height=22)
         self.menubar_frame.pack_propagate(False)
@@ -51,17 +47,17 @@ class Window(Tk):
 
         self.subject_overview = SubjectOverview(self, notensys)
 
-        self.rightPane = Frame(self, width=300, bg=notensys.bg_color)
+        self.rightPane = Frame(self, width=300)
         self.rightPane.pack(side=RIGHT, fill=Y, padx=5, pady=(0, 5))
 
         self.subject_attributes = SubjectAttributes(self.rightPane, self.notensys)
         self.subject_attributes.pack(fill=BOTH, expand=True)
 
-        self.bottom_right_pane = LabelFrame(self.rightPane, text="Leistungsnachweise", width=310, height=1000, bg=notensys.bg_color, fg=notensys.text_color)
+        self.bottom_right_pane = ttk.LabelFrame(self.rightPane, text="Leistungsnachweise", width=310, height=1000)
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 
-        self.rechnung_erklaerung = LabelFrame(self.bottom_right_pane, text="Rechnung", height=100, bg=notensys.bg_color, fg=notensys.text_color)
+        self.rechnung_erklaerung = ttk.LabelFrame(self.bottom_right_pane, text="Rechnung", height=100)
         self.rechnung_erklaerung.pack(padx=5, pady=(0, 5), side=BOTTOM, fill=X)
         self.text = Label(self.rechnung_erklaerung, text="(KL+GL)/2")
         self.text.pack()

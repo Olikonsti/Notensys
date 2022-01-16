@@ -1,4 +1,5 @@
 import tkinter.messagebox
+from tkdarktitle import *
 
 from VerticalScrolledFrame import *
 from tkinter import *
@@ -6,7 +7,7 @@ import tkinter.ttk as ttk
 
 from WindowFeatures.GradeListElement import *
 
-class GradeList(LabelFrame):
+class GradeList(ttk.LabelFrame):
     def __init__(self, parent, text, grades, subject, notensys, mode):
         super().__init__(parent, text=text, height=100)
         self.parent = parent
@@ -19,16 +20,16 @@ class GradeList(LabelFrame):
         self.selected = None
 
         self.topbar = Frame(self)
-        self.topbar.pack(fill=X)
+        self.topbar.pack(fill=X, pady=(0, 5))
 
         self.add_btn = ttk.Button(self.topbar, text="+", width=4, command=self.add_dialog)
-        self.add_btn.pack(side=LEFT)
+        self.add_btn.pack(side=LEFT, padx=3)
 
         self.rem_btn = ttk.Button(self.topbar, text="-", width=4, command=self.rem_grade)
-        self.rem_btn.pack(side=LEFT)
+        self.rem_btn.pack(side=LEFT, padx=3)
 
         self.edit_btn = ttk.Button(self.topbar, text="Edit", width=4, command=self.edit_grade)
-        self.edit_btn.pack(side=LEFT)
+        self.edit_btn.pack(side=LEFT, padx=3)
 
 
         self.scrollarea = VerticalScrolledFrame(self, height=100)
@@ -45,20 +46,24 @@ class GradeList(LabelFrame):
         if self.selected == None:
             return 0
         self.win = Toplevel(self.parent)
+        dark_title_bar(self.win)
         self.win.grab_set()
         self.win.focus_force()
         self.win.iconbitmap("DATA/icon.ico")
         self.win.title("Note hinzufügen")
         self.win.resizable(False, False)
+        dark_title_bar(self.win)
         self.win.geometry("250x170")
 
-        self.lf = LabelFrame(self.win, text="Notiz")
+
+
+        self.lf = ttk.LabelFrame(self.win, text="Notiz")
         self.name_entry = ttk.Entry(self.lf)
         self.name_entry.pack()
         self.name_entry.insert(0, self.selected.grade_text)
         self.lf.pack(anchor=NW, padx=5, pady=(5, 0))
 
-        self.lf = LabelFrame(self.win, text="Punkte")
+        self.lf = ttk.LabelFrame(self.win, text="Punkte")
         self.grade_entry = ttk.Entry(self.lf)
         self.grade_entry.pack()
         self.grade_entry.insert(0, self.grades[self.selected.grade_text])
@@ -91,16 +96,18 @@ class GradeList(LabelFrame):
         self.win = Toplevel(self.parent)
         self.win.grab_set()
         self.win.focus_force()
+
+        self.win.resizable(False, False)
+        dark_title_bar(self.win)
         self.win.iconbitmap("DATA/icon.ico")
         self.win.title("Note hinzufügen")
-        self.win.resizable(False, False)
         self.win.geometry("250x170")
-        self.lf = LabelFrame(self.win, text="Notiz")
+        self.lf = ttk.LabelFrame(self.win, text="Notiz")
         self.name_entry = ttk.Entry(self.lf)
         self.name_entry.pack()
         self.lf.pack(anchor=NW, padx=5, pady=(5, 0))
 
-        self.lf = LabelFrame(self.win, text="Punkte")
+        self.lf = ttk.LabelFrame(self.win, text="Punkte")
         self.grade_entry = ttk.Entry(self.lf)
         self.grade_entry.pack()
         self.lf.pack(anchor=NW, padx=5, pady=(5, 0))

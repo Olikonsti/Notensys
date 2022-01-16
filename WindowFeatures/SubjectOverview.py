@@ -6,9 +6,9 @@ from BubbleSort import bubble_sort
 from WindowFeatures.SubjectOverviewElement import *
 
 
-class SubjectOverview(LabelFrame):
+class SubjectOverview(ttk.LabelFrame):
     def __init__(self, window, notensys):
-        super().__init__(window, text="Fächer", width=300, bg=notensys.bg_color, fg=notensys.text_color)
+        super().__init__(window, text="Fächer", width=300)
 
         self.subjects_displayed = []
         self.selected = None
@@ -16,7 +16,7 @@ class SubjectOverview(LabelFrame):
         self.notensys = notensys
 
         self.topbar = Frame(self)
-        self.topbar.pack(fill=X)
+        self.topbar.pack(fill=X, pady=(0, 5))
 
         self.add_btn = ttk.Button(self.topbar, text="+", width=4, command=notensys.add_subject)
         self.add_btn.pack(side=LEFT, padx=3)

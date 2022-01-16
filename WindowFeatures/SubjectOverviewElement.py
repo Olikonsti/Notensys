@@ -34,7 +34,7 @@ class SubjectOverviewElement(Frame):
         self.color_indicator.bind("<Button-1>", self.toggle_select)
         self.point_average.bind("<Button-1>", self.toggle_select)
 
-        self.pack(fill=X, pady=2)
+        self.pack(fill=X, pady=2, padx=(5, 1))
         self.deselect()
 
     def toggle_select(self, event=None):
@@ -56,7 +56,7 @@ class SubjectOverviewElement(Frame):
         self.editMenu(self.subject_attributes.interior,)
         self.subject_name.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
         self.point_average.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
-        self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color, highlightcolor=self.notensys.highlight_color, highlightthickness=1)
+        self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color_selected, highlightcolor=self.notensys.highlight_color_selected, highlightthickness=1)
 
     def deselect(self):
         try:
@@ -71,7 +71,7 @@ class SubjectOverviewElement(Frame):
         self.selected = False
         self.subject_name.config(bg=self.notensys.bg_color)
         self.point_average.config(bg=self.notensys.bg_color)
-        self.config(bg=self.notensys.bg_color, highlightbackground="#ABABAB", highlightcolor="#ABABAB")
+        self.config(bg=self.notensys.bg_color, highlightbackground=self.notensys.highlight_color, highlightcolor=self.notensys.highlight_color)
 
     def editMenu(self, parent):
         self.name_entry = ttk.Entry(parent)
