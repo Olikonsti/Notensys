@@ -74,7 +74,13 @@ class SubjectOverview(ttk.LabelFrame):
         self.redraw()
 
 
-    def redraw(self):
+    def redraw(self, blured_already=False):
+        blur = False
+        if not blured_already:
+            if self.notensys.window.blur_enabled:
+                self.notensys.window.blur.disable()
+                blur = True
+
         selected = self.selected
         for i in self.subjects_displayed:
             i.destroy()
@@ -86,3 +92,8 @@ class SubjectOverview(ttk.LabelFrame):
                 if selected.subject == i.subject:
                     i.select()
         self.update_average_label()
+
+        if not blured_already:
+            if blur:
+                self.notensys.window.blur.enable()
+

@@ -121,17 +121,30 @@ class GradeList(ttk.LabelFrame):
             self.win.destroy()
         else:
             tkinter.messagebox.showinfo("Kann Objekt nicht erstellen", "Es existiert bereits ein Objekt mit dieser Notiz.")
+        if self.notensys.window.blur_enabled:
+            self.notensys.window.blur.lift_bg()
+
         self.redraw()
 
 
     def redraw(self):
+        blur = False
+        if self.notensys.window.blur_enabled:
+            self.notensys.window.blur.disable()
+            blur = True
+
         for i in self.items_displayed:
             i.destroy()
         self.items_displayed.clear()
         for i in self.grades:
             GradeListElement(self.scrollarea.interior, self, i, self.grades[i])
 
-        self.notensys.window.subject_overview.redraw()
+        self.notensys.window.subject_overview.redraw(blured_already=True)
+
+        if blur:
+            self.notensys.window.blur.enable()
+
+
 
 
 

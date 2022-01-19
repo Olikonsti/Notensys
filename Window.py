@@ -20,6 +20,8 @@ class Window(Tk):
             self.blur_enabled = self.notensys.settings_save["3"]
             if self.blur_enabled:
                 self.blur = BlurWindow(self, "#1c1c1c")
+        else:
+            self.blur_enabled = False
         #self.blur.enable()
 
         self.expanded = False
