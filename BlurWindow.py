@@ -11,6 +11,7 @@ class BlurWindow(Toplevel):
         self.overrideredirect(True)
         self.window = window
         self.enabled = True
+        self.freeze = False
         self.transparent_color = color
         def handle_focus(event=None):
             window.focus_set()
@@ -38,9 +39,8 @@ class BlurWindow(Toplevel):
         self.picture = ImageTk.PhotoImage(self.ss)
         image1 = Label(self.frame, image=self.picture)
         image1.image = self.picture
-        image1.place(x=0, y=0)
         self.image1 = image1
-        self.frame.config(bg="white")
+        self.frame.config(bg="black")
         self.frame.pack(expand="true", fill=BOTH)
 
 
@@ -57,6 +57,7 @@ class BlurWindow(Toplevel):
 
         self.after(1, self.disable)
         self.update()
+        image1.place(x=self.window.winfo_x() * -1 -2, y=self.window.winfo_y() * -1)
 
     def lift_bg(self, event=None):
         self.deiconify()
@@ -75,6 +76,7 @@ class BlurWindow(Toplevel):
             self.window.deiconify()
         self.window.bind("<FocusIn>", lift_bg)
         self.window.bind("<Configure>", self.update_task)
+        self.update_task()
         self.window.wm_attributes("-transparentcolor", self.transparent_color)
         self.change_geometry_width(1)
         self.change_geometry_width(-1)
@@ -103,23 +105,34 @@ class BlurWindow(Toplevel):
         self.window.bind("<FocusIn>", lambda e:print)
 
     def update_task(self, event=None, repeat=True):
-        self.width = self.window.winfo_width()
-        self.height = self.window.winfo_height()
-        self.x = self.window.winfo_x()
-        self.y = self.window.winfo_y()
+        if not self.freeze:
+            self.width = self.window.winfo_width()
+            self.height = self.window.winfo_height()
+            self.x = self.window.winfo_x()
+            self.y = self.window.winfo_y()
+            self.update()
 
-        if self.x != self.last_x or self.y != self.last_y or self.height != self.last_height or self.width != self.last_width:
-            self.image1 = Label(self.frame, image=self.picture)
-            self.image1.image = self.picture
-            self.image1.place(x=self.winfo_x() * -1 , y=self.winfo_y() * -1 )
-            #self.image1 = image1
+            if (self.x != self.last_x or self.y != self.last_y or self.height != self.last_height or self.width != self.last_width) :
 
-            self.geometry(f"{self.window.winfo_width()-1}x{self.window.winfo_height()}+{self.window.winfo_x() + 8}+{self.window.winfo_y() + 30}")
+                self.freeze = True
+                self.image1 = Label(self.frame, image=self.picture)
+                self.image1.image = self.picture
+                self.image1.place(x=self.winfo_x() * -1-2 , y=self.winfo_y() * -1 )
+                #self.image1 = image1
+
+                self.geometry(f"{self.window.winfo_width()-1}x{self.window.winfo_height()}+{self.window.winfo_x() + 8}+{self.window.winfo_y() + 30}")
 
 
-            self.last_width = self.width
-            self.last_height = self.height
-            self.last_x = self.x
-            self.last_y = self.y
+                self.last_width = self.width
+                self.last_height = self.height
+                self.last_x = self.x
+                self.last_y = self.y
 
-        #self.after(10, self.update_task)
+                self.after(80, self.unfreeze)
+
+            #self.after(10, self.update_task)
+
+
+    def unfreeze(self):
+        self.freeze = False
+        self.update_task()
