@@ -5,6 +5,7 @@ from WindowFeatures.TitleBarMenuItem import *
 
 from WindowFeatures.SubjectOverview import *
 from WindowFeatures.SubjectAttributes import *
+from BlurWindow import *
 
 class Window(Tk):
     def __init__(self, notensys):
@@ -13,10 +14,23 @@ class Window(Tk):
         self.title("Notensys Übersicht")
         self.geometry("650x600")
 
+        self.blur_enabled = False
+
+        self.blur = BlurWindow(self, "#1c1c1c")
+        #self.blur.enable()
+
+        self.expanded = False
+
         self.style = ttk.Style(self)
         if self.notensys.dark:
             self.tk.call("source", "DATA/theme/sun-valley.tcl")
             self.tk.call("set_theme", "dark")
+            if self.blur_enabled:
+                self.enable_blur()
+
+        else:
+            self.tk.call("source", "DATA/theme/sun-valley.tcl")
+            self.tk.call("set_theme", "light")
 
         if notensys.dark:
             dark_title_bar(self)
@@ -47,13 +61,13 @@ class Window(Tk):
 
         self.subject_overview = SubjectOverview(self, notensys)
 
-        self.rightPane = Frame(self, width=300)
+        self.rightPane = Frame(self)
         self.rightPane.pack(side=RIGHT, fill=Y, padx=5, pady=(0, 5))
 
         self.subject_attributes = SubjectAttributes(self.rightPane, self.notensys)
         self.subject_attributes.pack(fill=BOTH, expand=True)
 
-        self.bottom_right_pane = ttk.LabelFrame(self.rightPane, text="Leistungsnachweise", width=310, height=1000)
+        self.bottom_right_pane = ttk.LabelFrame(self.rightPane, text="Leistungsnachweise", width=260, height=1000)
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 
@@ -65,6 +79,24 @@ class Window(Tk):
         self.protocol("WM_DELETE_WINDOW", self.notensys.save_year_exit)
 
         self.update()
+
+    def enable_blur(self):
+        self.blur_enabled = True
+        self.blur.enable()
+
+    def disable_blur(self):
+        self.blur.disable()
+        self.blur_enabled = False
+
+
+    def change_geometry_width(self, pixels):
+        try:
+            width = self.winfo_width()
+            height = self.winfo_height()
+            self.bottom_right_pane.config(width=self.bottom_right_pane.winfo_width()+pixels)
+            self.geometry(f"{width+pixels}x{height}")
+        except:
+            pass
 
     def change_year(self):
         self.notensys.save_year()

@@ -1,7 +1,5 @@
 {
     "subjects": [
-        "Newsss",
-        "Englisch",
         "Mathe"
     ],
     "grades": {
@@ -10,19 +8,8 @@
                 "ausfrage": 13,
                 "ex": 14
             },
-            "big": {}
-        },
-        "Newsss": {
-            "small": {
-                "6": 6
-            },
-            "big": {}
-        },
-        "Englisch": {
-            "small": {
-                "8": 8
-            },
-            "big": {}
+            "big": {},
+            "NBT": {}
         }
     }
 }

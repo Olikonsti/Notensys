@@ -5,7 +5,7 @@ from WindowFeatures.ColorIndicator import *
 
 class GradeListElement(Frame):
     def __init__(self, parent, gradelist, grade_text, grade_points):
-        super().__init__(parent, highlightthickness=1, width=300)
+        super().__init__(parent, highlightthickness=1)
         self.selected = False
         self.grade_text = grade_text
         self.gradelist = gradelist
@@ -16,7 +16,7 @@ class GradeListElement(Frame):
         self.notiz.pack(side=LEFT)
 
         self.color_indicator = ColorIndicator(self, points=grade_points)
-        self.color_indicator.place(relx=0.51, rely=0.15)
+        self.color_indicator.place(relx=0.56, rely=0.15)
 
         self.points = Label(self, text=grade_points, fg=self.notensys.text_color)
         self.points.place(relx=0.9, y=0)

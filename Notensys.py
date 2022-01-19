@@ -10,13 +10,12 @@ import os.path
 
 class Notensys():
     def __init__(self):
-        self.version = "3.4"
-        self.version_date = "16.01.2022"
+        self.version = "3.6"
+        self.version_date = "19.01.2022"
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()
 
     def continue_startup(self):
-
         self.settings_save_manager = SettingsSaveManager(self)
         self.settings_save = {}
         for i in range(50):
@@ -31,7 +30,7 @@ class Notensys():
         if self.settings_save["2"] == "DARK":
             self.dark = True
             self.text_color = "#afb1b3"
-            self.bg_color = "#1C1C1C"
+            self.bg_color = "#1C1C1D"
             self.bg_select = "#2b2b2b"
             self.highlight_color = "#3e3f41"
             self.highlight_color_selected = "#3e3f41"
@@ -43,16 +42,14 @@ class Notensys():
             self.highlight_color = "#ababab"
             self.highlight_color_selected = "#0078d4"
 
-
-
-
         self.save_manager = SaveManager(self, self.settings_save["0"])
         self.save = {
             "subjects": ["Mathe"],
             "grades": {
                 "Mathe": {
                     "small": {"ausfrage": 13, "ex": 14},
-                    "big": {}
+                    "big": {},
+                    "NBT": {}
                 },
             }
         }
@@ -100,15 +97,13 @@ class Notensys():
                 messagebox.showinfo("Kann kein neues Element erstellen", "Ein Element mit dem Namen existiert bereits.")
                 return 0
         self.save["subjects"].append("New")
-        self.save["grades"]["New"] = {"small": {}, "big": {}}
+        self.save["grades"]["New"] = {"small": {}, "big": {}, "NBT":{}}
 
         self.window.subject_overview.redraw()
 
         for i in self.window.subject_overview.subjects_displayed:
             if i.subject == "New":
                 i.select()
-
-
 
     def rem_subject(self, name):
         if name != None:
@@ -117,21 +112,31 @@ class Notensys():
         self.window.subject_overview.redraw()
 
     def rename_subject(self, old, new, redraw=True):
-
         for i in self.save["subjects"]:
             if i == new:
                 messagebox.showinfo("Kann kein neues Element erstellen", "Ein Element mit dem Namen existiert bereits.")
                 return 0
 
         temp_grades = self.save["grades"][old]
-
         self.save["subjects"].remove(old)
         del self.save["grades"][old]
-
         self.save["subjects"].append(new)
         self.save["grades"][new] = temp_grades
         if redraw:
             self.window.subject_overview.redraw()
+
+    def calculate_whole_average(self):
+        sum = 0
+        no_grade_subjects = 0
+        for i in self.save["subjects"]:
+            c = self.calculate_average(i)
+            if c != '   -':
+                sum += float(self.calculate_average(i))
+            else:
+                no_grade_subjects += 1
+        sum = sum/(len(self.save["subjects"])-no_grade_subjects)
+        return round(sum, 2)
+
 
     def calculate_average(self, subject):
         avg_small = 0
@@ -155,7 +160,6 @@ class Notensys():
             avg_big = grade_sum / grade_count
         except:
             avg_big = -1
-
         try:
             if avg_big == -1:
                 avg = round(avg_small, 2)

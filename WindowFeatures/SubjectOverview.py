@@ -30,7 +30,13 @@ class SubjectOverview(ttk.LabelFrame):
         self.selector.pack(side=LEFT, padx=3)
         self.selector["menu"].config(bg=notensys.bg_color, fg=notensys.text_color)
 
+        avg = self.notensys.calculate_whole_average()
+        self.average_label = ttk.Label(self.topbar, text=f"Schnitt: {avg}")
+        self.average_label.pack(side=LEFT, padx=3)
 
+
+        self.average_color_indicator = ColorIndicator(self.topbar, avg)
+        self.average_color_indicator.pack(side=LEFT, padx=4)
 
 
         self.scrollarea = VerticalScrolledFrame(self)
@@ -38,6 +44,13 @@ class SubjectOverview(ttk.LabelFrame):
 
         self.pack(side=LEFT, fill=BOTH, expand=True, padx=(5, 0), pady=(0, 5))
         self.sort_subjects(mode_=self.notensys.settings_save["1"])
+
+    def update_average_label(self):
+        avg = self.notensys.calculate_whole_average()
+        self.average_label.config(text=f"Schnitt: {avg}")
+        self.average_color_indicator.destroy()
+        self.average_color_indicator = ColorIndicator(self.topbar, avg)
+        self.average_color_indicator.pack(side=LEFT, padx=4)
 
     def sort_subjects(self, event=None, mode_=None):
         mode = self.sort_var.get()
@@ -72,3 +85,4 @@ class SubjectOverview(ttk.LabelFrame):
             if selected != None:
                 if selected.subject == i.subject:
                     i.select()
+        self.update_average_label()

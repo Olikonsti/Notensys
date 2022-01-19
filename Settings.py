@@ -49,6 +49,13 @@ class Settings(Toplevel):
                                           variable=self.dark_mode_var)
         self.dark_mode.pack(anchor=W)
 
+        if self.window.notensys.dark:
+            self.blur_var = IntVar()
+            self.blur_var.set(self.window.blur_enabled)
+            self.blur_swtch = ttk.Checkbutton(self, text="Transparenz", style="Switch.TCheckbutton",
+                                             variable=self.blur_var)
+            self.blur_swtch.pack(anchor=W)
+
     def fill_default_settings(self, notensys):
         notensys.settings_save["0"] = "DATA/Saves"
 
@@ -67,6 +74,14 @@ class Settings(Toplevel):
         self.window.settings_open = False
 
     def apply(self):
+        if self.window.notensys.dark:
+            if self.blur_var.get():
+                if not self.window.blur_enabled:
+                    self.window.after(10, self.window.enable_blur)
+            else:
+                if self.window.blur_enabled:
+                    self.window.disable_blur()
+
         if self.dark_mode_var.get():
             if self.settings_save["2"] == "LIGHT":
                 tkinter.messagebox.showinfo("Warnung", "Bitte starte das Programm neu!")

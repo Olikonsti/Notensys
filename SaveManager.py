@@ -18,11 +18,27 @@ class SaveManager():
         data = f.read()
         f.close()
         try:
+            true = True
+            false = False
             exec(f"global out_; out_ = {data}")
+
         except Exception as e:
             tkinter.messagebox.showerror("Jahr laden: Fehler", f"Diese Datei is beschädigt und konnte nicht geladen werden.\nFEHLER:{e}")
+            raise SystemExit
+        out = self.check_values(out_)
+        return out
 
-        return out_
+    def check_values(self, data):
+
+        # add NBT tab for version 3.5
+        for subject in data["grades"]:
+            if "NBT" not in data["grades"][subject]:
+                data["grades"][subject]["NBT"] = {}
+            #if subject == "Geschichte":
+                #data["grades"][subject]["NBT"]["ist_geschichte"] = True
+
+        return data
+
 
     def open_folder(self):
         os.startfile(self.savefolder)

@@ -4,7 +4,7 @@ from WindowFeatures.GradeList import *
 
 class GradeEditor(Frame):
     def __init__(self, parent, subject, notensys):
-        super().__init__(parent, width=300)
+        super().__init__(parent)
 
         self.notensys = notensys
         self.subject = subject

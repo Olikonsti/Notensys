@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 
 from WindowFeatures.ColorIndicator import *
 from WindowFeatures.GradeEditor import *
+from WindowFeatures.FourGradeEditor import *
 
 
 class SubjectOverviewElement(Frame):
@@ -59,6 +60,9 @@ class SubjectOverviewElement(Frame):
         self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color_selected, highlightcolor=self.notensys.highlight_color_selected, highlightthickness=1)
 
     def deselect(self):
+        if self.window.expanded:
+            self.window.change_geometry_width(-260)
+            self.window.expanded = False
         try:
             self.notensys.window.active_grade_editor.destroy()
         except:
@@ -84,7 +88,12 @@ class SubjectOverviewElement(Frame):
         self.apply_btn = ttk.Button(btn_frame, text="Speichern", command=self.upd_data)
         self.apply_btn.pack(side=RIGHT, anchor=NW, padx=(5, 5), pady=5)
 
-        GradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
+        if "ist_geschichte" in self.notensys.save["grades"][self.subject]["NBT"]:
+            FourGradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
+        else:
+            GradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
+
+
 
     def upd_data(self):
         self.notensys.rename_subject(self.subject, self.name_entry.get())
