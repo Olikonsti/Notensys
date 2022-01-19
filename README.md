@@ -2,6 +2,8 @@
 
 a small program to organize all your grades in a visually pleasing way
 
+![image](https://user-images.githubusercontent.com/68354546/150167173-f3760765-a12a-4343-a867-4b373c611348.png)
+
 ![Screenshot 2022-01-16 183718](https://user-images.githubusercontent.com/68354546/149671853-8ffa1198-3211-4462-8aed-8f75234cf331.png)
 
 ![Screenshot 2022-01-16 185645](https://user-images.githubusercontent.com/68354546/149671855-d4380eba-a4fd-481b-a8ef-23d67d4e073a.png)
