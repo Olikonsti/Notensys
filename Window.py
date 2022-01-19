@@ -13,10 +13,13 @@ class Window(Tk):
         self.notensys = notensys
         self.title("Notensys Übersicht")
         self.geometry("650x600")
+        self.config(bg=self.notensys.bg_color_blur)
 
-        self.blur_enabled = False
-
-        self.blur = BlurWindow(self, "#1c1c1c")
+        if notensys.dark:
+            dark_title_bar(self)
+            self.blur_enabled = self.notensys.settings_save["3"]
+            if self.blur_enabled:
+                self.blur = BlurWindow(self, "#1c1c1c")
         #self.blur.enable()
 
         self.expanded = False
@@ -32,8 +35,7 @@ class Window(Tk):
             self.tk.call("source", "DATA/theme/sun-valley.tcl")
             self.tk.call("set_theme", "light")
 
-        if notensys.dark:
-            dark_title_bar(self)
+
         #self.resizable(False, True)
         self.iconbitmap("DATA/icon.ico")
         self.settings_open = False
@@ -82,7 +84,11 @@ class Window(Tk):
 
     def enable_blur(self):
         self.blur_enabled = True
-        self.blur.enable()
+        try:
+            self.blur.enable()
+        except:
+            self.blur = BlurWindow(self, "#1c1c1c")
+            self.blur.enable()
 
     def disable_blur(self):
         self.blur.disable()

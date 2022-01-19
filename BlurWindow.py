@@ -1,9 +1,6 @@
 from tkinter import *
 import pyautogui
 from PIL import ImageTk, ImageFilter, ImageEnhance
-from PIL import ImageGrab
-from functools import partial
-#ImageGrab.grab = partial(ImageGrab.grab, all_screens=True)
 
 class BlurWindow(Toplevel):
     def __init__(self, window, color):
@@ -13,6 +10,7 @@ class BlurWindow(Toplevel):
         self.enabled = True
         self.freeze = False
         self.transparent_color = color
+
         def handle_focus(event=None):
             window.focus_set()
         self.bind("<FocusIn>", handle_focus)
@@ -80,7 +78,7 @@ class BlurWindow(Toplevel):
         self.window.wm_attributes("-transparentcolor", self.transparent_color)
         self.change_geometry_width(1)
         self.change_geometry_width(-1)
-        self.after(10, lift_bg)
+        self.after(2, lift_bg)
 
     def disable(self):
         self.enabled = False
@@ -98,7 +96,11 @@ class BlurWindow(Toplevel):
 
 
     def update_image(self, event=None):
-        self.ss = self.upd()
+        self.ss = self.upd(hide=True)
+        self.picture = ImageTk.PhotoImage(self.ss)
+        self.change_geometry_width(1)
+        self.change_geometry_width(-1)
+        self.after(2, self.lift_bg)
 
     def kill(self):
         self.window.bind("<Configure>", lambda e:print)

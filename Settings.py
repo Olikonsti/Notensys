@@ -52,7 +52,7 @@ class Settings(Toplevel):
         if self.window.notensys.dark:
             self.blur_var = IntVar()
             self.blur_var.set(self.window.blur_enabled)
-            self.blur_swtch = ttk.Checkbutton(self, text="Transparenz", style="Switch.TCheckbutton",
+            self.blur_swtch = ttk.Checkbutton(self, text="Transparenz (Experimentell: längere Ladezeit / schlechtere Leistung)", style="Switch.TCheckbutton",
                                              variable=self.blur_var)
             self.blur_swtch.pack(anchor=W)
 
@@ -65,6 +65,8 @@ class Settings(Toplevel):
             notensys.settings_save["1"] = "Alphabetically"
         if notensys.settings_save["2"] == "UNDEFINED":
             notensys.settings_save["2"] = "DARK"
+        if notensys.settings_save["3"] == "UNDEFINED":
+            notensys.settings_save["3"] = False
 
         notensys.settings_save_manager.save(notensys.settings_save)
 
@@ -77,10 +79,11 @@ class Settings(Toplevel):
         if self.window.notensys.dark:
             if self.blur_var.get():
                 if not self.window.blur_enabled:
-                    self.window.after(10, self.window.enable_blur)
+                    self.window.enable_blur()
             else:
                 if self.window.blur_enabled:
                     self.window.disable_blur()
+            self.settings_save["3"] = self.window.blur_enabled
 
         if self.dark_mode_var.get():
             if self.settings_save["2"] == "LIGHT":

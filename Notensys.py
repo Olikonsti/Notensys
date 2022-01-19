@@ -30,12 +30,14 @@ class Notensys():
         if self.settings_save["2"] == "DARK":
             self.dark = True
             self.text_color = "#afb1b3"
+            self.bg_color_blur = "#1C1C1C"
             self.bg_color = "#1C1C1D"
             self.bg_select = "#2b2b2b"
             self.highlight_color = "#3e3f41"
             self.highlight_color_selected = "#3e3f41"
         else:
             self.dark = False
+            self.bg_color_blur = "#f0f0f0"
             self.bg_color = "#f0f0f0"
             self.bg_select = "#D8E6F1"
             self.text_color = "#282828"
