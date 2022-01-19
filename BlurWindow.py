@@ -130,7 +130,7 @@ class BlurWindow(Toplevel):
                 self.last_x = self.x
                 self.last_y = self.y
 
-                self.after(80, self.unfreeze)
+                self.after(20, self.unfreeze)
 
             #self.after(10, self.update_task)
 
