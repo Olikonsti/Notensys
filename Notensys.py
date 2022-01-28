@@ -14,7 +14,7 @@ class Notensys():
         self.DATA = "DATA"
         if web_mode:
             self.DATA = "/home/pi/Desktop/server/NotensysBackend/DATA"
-        self.version = "4.2"
+        self.version = "1.2"
         self.version_date = "28.01.2022"
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()

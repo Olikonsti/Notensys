@@ -101,8 +101,6 @@ Die neuste Version {self.newest_version}
         text = Label(scf.interior, justify=LEFT, text=self.changelog, font="Helvetica 11", wraplengt=500)
         text.pack(side=TOP, anchor=NW, padx=10, pady=10)
 
-        text["text"] = "yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-
         btm_frame = ttk.Frame(self)
         btm_frame.pack(side=BOTTOM, fill=X)
         self.install_btn = ttk.Button(btm_frame, text="installieren", command=self.download, style="Accent.TButton")
