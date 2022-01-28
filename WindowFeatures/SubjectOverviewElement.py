@@ -1,8 +1,3 @@
-from VerticalScrolledFrame import *
-from tkinter import *
-import tkinter.ttk as ttk
-
-from WindowFeatures.ColorIndicator import *
 from WindowFeatures.GradeEditor import *
 from WindowFeatures.FourGradeEditor import *
 
@@ -78,15 +73,18 @@ class SubjectOverviewElement(Frame):
         self.config(bg=self.notensys.bg_color, highlightbackground=self.notensys.highlight_color, highlightcolor=self.notensys.highlight_color)
 
     def editMenu(self, parent):
-        self.name_entry = ttk.Entry(parent)
-        self.name_entry.pack(anchor=NW, padx=5, pady=5)
-        self.name_entry.insert(0, self.subject)
+
 
         btn_frame = Frame(parent)
-        btn_frame.pack(side=BOTTOM, fill=X)
+        btn_frame.pack(fill=X)
 
-        self.apply_btn = ttk.Button(btn_frame, text="Speichern", command=self.upd_data)
-        self.apply_btn.pack(side=RIGHT, anchor=NW, padx=(5, 5), pady=5)
+        self.name_entry = ttk.Entry(btn_frame)
+        self.name_entry.bind('<Return>', self.upd_data)
+        self.name_entry.pack(padx=(10, 0), pady=5, side=LEFT)
+        self.name_entry.insert(0, self.subject)
+
+        self.apply_btn = ttk.Button(btn_frame, text="✔", command=self.upd_data)
+        self.apply_btn.pack(side=LEFT, padx=(5, 5), pady=5)
 
         if "ist_geschichte" in self.notensys.save["grades"][self.subject]["NBT"]:
             FourGradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
@@ -95,6 +93,6 @@ class SubjectOverviewElement(Frame):
 
 
 
-    def upd_data(self):
+    def upd_data(self, event=None):
         self.notensys.rename_subject(self.subject, self.name_entry.get())
 

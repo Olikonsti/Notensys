@@ -1,9 +1,9 @@
+import time
 from tkinter import *
-import tkinter.ttk as ttk
-from BlurWindow import *
 from PIL import Image, ImageTk
 import webbrowser
-from tkdarktitle import *
+from Utils.tkdarktitle import *
+from Utils.BlurEnabler import enable_blur
 
 
 class About(Toplevel):
@@ -11,24 +11,22 @@ class About(Toplevel):
         super().__init__(window)
         self.window = window
 
+        self.grab_set()
+        self.focus_force()
+
         self.tImg = Image.open('DATA/icon.ico')
         self.img = ImageTk.PhotoImage(self.tImg)
 
-        if self.window.blur_enabled:
-            self.window.blur.block_lift()
-
-
-
-
         self.resizable(False, False)
         if window.notensys.dark:
-            dark_title_bar(self)
+            try:
+                dark_title_bar(self)
+            except:
+                pass
 
         self.iconbitmap("DATA/icon.ico")
         self.title("Über Notensys")
         self.geometry("300x400")
-
-
 
         self.protocol("WM_DELETE_WINDOW", self.exit)
         panel = Label(self, image=self.img)
@@ -38,15 +36,10 @@ class About(Toplevel):
         if window.notensys.dark:
             self.config(bg="#1c1c1c")
             if window.blur_enabled:
-                self.blur = BlurWindow(self, "#1c1c1c")
-                self.blur.enable()
-
-        if window.blur_enabled:
-            self.after(2, self.blur.lift_bg())
-
-        self.bind("<FocusOut>", self.blur.lift_bg)
-
-        self.bind("<FocusIn>", lambda e: (self.blur.lift_bg(), print("FOC")))
+                try:
+                    enable_blur(self)
+                except:
+                    pass
 
 
         Label(self, text=f"Version: {self.window.notensys.version}").pack()
@@ -72,8 +65,5 @@ class About(Toplevel):
         def callback(url):
             webbrowser.open_new(url)
 
-
     def exit(self):
-        if self.window.blur_enabled:
-            self.window.blur.unblock_lift()
         self.destroy()

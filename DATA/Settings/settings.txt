@@ -1,6 +1,6 @@
 {
     "0": "DATA/Saves",
-    "1": "0 - 15",
+    "1": "Alphabetically",
     "2": "DARK",
     "3": true,
     "4": "UNDEFINED",

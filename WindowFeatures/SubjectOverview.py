@@ -1,7 +1,4 @@
-from VerticalScrolledFrame import *
-from tkinter import *
-import tkinter.ttk as ttk
-from BubbleSort import bubble_sort
+from Utils.BubbleSort import bubble_sort
 
 from WindowFeatures.SubjectOverviewElement import *
 
@@ -75,12 +72,6 @@ class SubjectOverview(ttk.LabelFrame):
 
 
     def redraw(self, blured_already=False):
-        blur = False
-        if not blured_already:
-            if self.notensys.window.blur_enabled:
-                self.notensys.window.blur.disable()
-                blur = True
-
         selected = self.selected
         for i in self.subjects_displayed:
             i.destroy()
@@ -93,7 +84,7 @@ class SubjectOverview(ttk.LabelFrame):
                     i.select()
         self.update_average_label()
 
-        if not blured_already:
-            if blur:
-                self.notensys.window.blur.enable()
-
+    def select_subject(self, subject):
+        for i in self.subjects_displayed:
+            if i.subject == subject:
+                i.select()

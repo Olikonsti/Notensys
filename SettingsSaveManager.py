@@ -3,10 +3,11 @@ import tkinter.messagebox
 import json
 from Settings import *
 
-DATA_FOLDER = "DATA\Settings"
 
 class SettingsSaveManager():
     def __init__(self, notensys):
+        global DATA_FOLDER
+        DATA_FOLDER = f"{notensys.DATA}/Settings"
         self.notensys = notensys
 
     def save(self, data=None):

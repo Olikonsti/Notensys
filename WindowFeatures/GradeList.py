@@ -1,9 +1,7 @@
 import tkinter.messagebox
-from tkdarktitle import *
+from Utils.tkdarktitle import *
 
-from VerticalScrolledFrame import *
-from tkinter import *
-import tkinter.ttk as ttk
+from Utils.VerticalScrolledFrame import *
 
 from WindowFeatures.GradeListElement import *
 
@@ -121,17 +119,11 @@ class GradeList(ttk.LabelFrame):
             self.win.destroy()
         else:
             tkinter.messagebox.showinfo("Kann Objekt nicht erstellen", "Es existiert bereits ein Objekt mit dieser Notiz.")
-        if self.notensys.window.blur_enabled:
-            self.notensys.window.blur.lift_bg()
 
         self.redraw()
 
 
     def redraw(self):
-        blur = False
-        if self.notensys.window.blur_enabled:
-            self.notensys.window.blur.disable()
-            blur = True
 
         for i in self.items_displayed:
             i.destroy()
@@ -139,10 +131,7 @@ class GradeList(ttk.LabelFrame):
         for i in self.grades:
             GradeListElement(self.scrollarea.interior, self, i, self.grades[i])
 
-        self.notensys.window.subject_overview.redraw(blured_already=True)
-
-        if blur:
-            self.notensys.window.blur.enable()
+        self.notensys.window.subject_overview.redraw()
 
 
 

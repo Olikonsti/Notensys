@@ -1,12 +1,15 @@
 import tkinter.messagebox
 from tkinter import *
 import tkinter.ttk as ttk
-from tkdarktitle import *
+from Utils.tkdarktitle import *
 
 class YearSelector(Tk):
     def __init__(self, notensys):
         super().__init__()
-        self.iconbitmap("DATA/icon.ico")
+        try:
+            self.iconbitmap(f"{notensys.DATA}/icon.ico")
+        except:
+            print("could not load icon")
         if notensys.dark:
             self.config(bg="#1c1c1c")
             ui_load_label = Label(self, text="UI und Speicherdateien Laden...", bg="#1c1c1c", font="SegoeUI 14", fg="#F0F0F0")
@@ -15,9 +18,15 @@ class YearSelector(Tk):
         self.notensys = notensys
 
         if notensys.dark:
-            dark_title_bar(self)
             try:
-                self.tk.call("source", "DATA/theme/sun-valley.tcl")
+                dark_title_bar(self)
+            except:
+                pass
+            try:
+                if self.notensys.web_mode:
+                    self.tk.call("source", f"{notensys.DATA}/theme/sun-valley-web.tcl")
+                else:
+                    self.tk.call("source", f"{notensys.DATA}/theme/sun-valley.tcl")
                 self.tk.call("set_theme", "dark")
             except Exception as e:
                 tkinter.messagebox.showerror("Error", f"Theme Loading Error: {e}")
@@ -51,8 +60,6 @@ class YearSelector(Tk):
             ui_load_label.destroy()
         except:
             pass
-
-
 
         self.mainloop()
 

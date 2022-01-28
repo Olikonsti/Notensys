@@ -9,9 +9,13 @@ import os.path
 
 
 class Notensys():
-    def __init__(self):
-        self.version = "3.62"
-        self.version_date = "19.01.2022"
+    def __init__(self, web_mode=False):
+        self.web_mode = web_mode
+        self.DATA = "DATA"
+        if web_mode:
+            self.DATA = "/home/pi/Desktop/server/NotensysBackend/DATA"
+        self.version = "4.2"
+        self.version_date = "28.01.2022"
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()
 
@@ -72,6 +76,11 @@ class Notensys():
         self.window = Window(self)
         self.window.mainloop()
 
+    def reload(self):
+        self.save_year()
+        self.window.destroy()
+        Notensys(web_mode=self.web_mode)
+
     def open_year_selector(self):
         self.year_selector = YearSelector(self)
         self.selected_year = self.year_selector.get_selection()
@@ -126,6 +135,7 @@ class Notensys():
         self.save["grades"][new] = temp_grades
         if redraw:
             self.window.subject_overview.redraw()
+        self.window.subject_overview.select_subject(new)
 
     def calculate_whole_average(self):
         sum = 0
