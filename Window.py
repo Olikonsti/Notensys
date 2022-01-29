@@ -1,3 +1,5 @@
+import tkinter.messagebox
+
 from Settings import *
 from About import *
 from WindowFeatures.TitleBarMenuItem import *
@@ -5,6 +7,8 @@ from WindowFeatures.SubjectOverview import *
 from WindowFeatures.SubjectAttributes import *
 from WindowFeatures.HeadlineLabel import HeadlineLabel
 from Utils.BlurEnabler import enable_blur
+
+from Utils.KombifachCreator import *
 
 
 
@@ -49,7 +53,7 @@ class Window(Tk):
         self.settings_instance = None
         self.active_grade_editor = None
 
-        self.menubar_frame = Frame(self, height=22)
+        self.menubar_frame = Frame(self, height=30)
         self.menubar_frame.pack_propagate(False)
         self.menubar_frame.pack(side=TOP, fill=X)
 
@@ -64,8 +68,12 @@ class Window(Tk):
         TitleBarItem(self.menubar_frame, notensys, "Einstellungen", self.open_settings)
         TitleBarItem(self.menubar_frame, notensys, "Jahr ändern", self.change_year)
         TitleBarItem(self.menubar_frame, notensys, "Über Notensys", self.open_about)
-        f = TitleBarItem(self.menubar_frame, notensys, "Fächer einrichten (bald)", self.open_about)
-        f.config(state=DISABLED)
+
+        self.subj_menu_btn = TitleBarMenuItem(self.menubar_frame, notensys, "Kombi einrichten")
+
+        subj_menu = Menu(self.subj_menu_btn, tearoff=0)
+        self.subj_menu_btn["menu"] = subj_menu
+        subj_menu.add_command(label="Geschichte/Sozi erstellen", command=self.open_kombifachcreator)
 
         self.update()
         self.notensys.window = self
@@ -81,11 +89,6 @@ class Window(Tk):
         self.bottom_right_pane = Frame(self.rightPane, width=260, height=1000)
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
-
-        #self.rechnung_erklaerung = ttk.LabelFrame(self.bottom_right_pane, text="Rechnung", height=100)
-        #self.rechnung_erklaerung.pack(padx=5, pady=(0, 5), side=BOTTOM, fill=X)
-        #self.text = Label(self.rechnung_erklaerung, text="(KL+GL)/2")
-        #self.text.pack()
 
         self.protocol("WM_DELETE_WINDOW", self.notensys.save_year_exit)
 
@@ -114,6 +117,16 @@ class Window(Tk):
 
     def open_about(self):
          About(self)
+
+    def open_kombifachcreator(self):
+        already_kombi = False
+        for i in self.notensys.save["grades"]:
+            if "sk_gs_kombi" in self.notensys.save["grades"][i]["NBT"]:
+                already_kombi = True
+        if not already_kombi:
+            KombifachCreator(self)
+        else:
+            tkinter.messagebox.showerror("Fehler beim Erstellen", "Kombi existiert schon")
 
 
 

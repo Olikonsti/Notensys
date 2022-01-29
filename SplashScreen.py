@@ -7,6 +7,7 @@ class SplashScreen(Tk):
         self.notensys = notensys
         self.overrideredirect(True)
         color = "#1c1c1c"
+        self.config(bg=color)
         try:
             dark_title_bar(self)
 

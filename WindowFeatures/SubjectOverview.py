@@ -1,6 +1,7 @@
 from Utils.BubbleSort import bubble_sort
 
 from WindowFeatures.SubjectOverviewElement import *
+from WindowFeatures.SubjectOverviewKomiElement import *
 
 
 class SubjectOverview(ttk.LabelFrame):
@@ -29,15 +30,13 @@ class SubjectOverview(ttk.LabelFrame):
 
         avg = self.notensys.calculate_whole_average()
         self.average_label = ttk.Label(self.topbar, text=f"Schnitt: {avg}")
-        self.average_label.pack(side=LEFT, padx=3)
-
+        #self.average_label.pack(side=LEFT, padx=3)
 
         self.average_color_indicator = ColorIndicator(self.topbar, avg)
-        self.average_color_indicator.pack(side=LEFT, padx=4)
-
+        #self.average_color_indicator.pack(side=LEFT, padx=4)
 
         self.scrollarea = VerticalScrolledFrame(self)
-        self.scrollarea.pack(expand=True, fill=BOTH)
+        self.scrollarea.pack(expand=True, fill=BOTH, padx=(0, 5))
 
         self.pack(side=LEFT, fill=BOTH, expand=True, padx=(5, 0), pady=(0, 5))
         self.sort_subjects(mode_=self.notensys.settings_save["1"])
@@ -47,7 +46,7 @@ class SubjectOverview(ttk.LabelFrame):
         self.average_label.config(text=f"Schnitt: {avg}")
         self.average_color_indicator.destroy()
         self.average_color_indicator = ColorIndicator(self.topbar, avg)
-        self.average_color_indicator.pack(side=LEFT, padx=4)
+        #self.average_color_indicator.pack(side=LEFT, padx=4)
 
     def sort_subjects(self, event=None, mode_=None):
         mode = self.sort_var.get()
@@ -76,8 +75,13 @@ class SubjectOverview(ttk.LabelFrame):
         for i in self.subjects_displayed:
             i.destroy()
         self.subjects_displayed.clear()
+
         for i in self.notensys.save["subjects"]:
-            SubjectOverviewElement(self, i, self.notensys)
+            if "sk_gs_kombi" in self.notensys.save["grades"][i]["NBT"]:
+                SubjectOverviewKombiElement(self, i, self.notensys)
+            else:
+                if not "is_sk" in self.notensys.save["grades"][i]["NBT"] and not "is_ges" in self.notensys.save["grades"][i]["NBT"]:    # wenn nicht sozialkunde oder geschichte in kombifach
+                    SubjectOverviewElement(self, i, self.notensys)
         for i in self.subjects_displayed:
             if selected != None:
                 if selected.subject == i.subject:

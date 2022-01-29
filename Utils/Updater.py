@@ -24,8 +24,6 @@ class Updater(Tk):
         else:
             self.exit()
 
-
-
     def display_info(self, text):
         a = Tk()
         a.title("Notensys updater")

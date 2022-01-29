@@ -61,6 +61,8 @@ class YearSelector(Tk):
         except:
             pass
 
+        self.geometry("300x100")
+
         self.mainloop()
 
     def exit(self):

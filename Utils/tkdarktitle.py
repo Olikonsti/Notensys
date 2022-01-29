@@ -5,7 +5,7 @@ def dark_title_bar(window):
     https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
     """
     window.update()
-    DWMWA_USE_IMMERSIVE_DARK_MODE = 20
+    DWMWA_USE_IMMERSIVE_DARK_MODE = 19
     set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
     get_parent = ct.windll.user32.GetParent
     hwnd = get_parent(window.winfo_id())

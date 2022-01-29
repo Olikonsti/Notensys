@@ -14,7 +14,7 @@ class VerticalScrolledFrame(ttk.Frame):
     * -- or write your own 'os' type check.
     * This comes from a different naming of the the scrollwheel 'button', on different systems.
     """
-    def __init__(self, parent, bg=None, fg=None, *args, **kw):
+    def __init__(self, parent, bg=None, fg=None, show_scrollbar=False, *args, **kw):
 
         # track changes to the canvas and frame width and sync them,
         # also updating the scrollbar
@@ -61,9 +61,17 @@ class VerticalScrolledFrame(ttk.Frame):
         ttk.Frame.__init__(self, parent, *args, **kw)
 
         # create a canvas object and a vertical scrollbar for scrolling it
-        vscrollbar = ttk.Scrollbar(self, orient=VERTICAL)
+        if show_scrollbar == False:
+            tf = Frame(self, width=0)
+            tf.pack_propagate(False)
+        else:
+            tf = Frame(self)
+            tf.pack(fill=Y, side=RIGHT, expand=FALSE)
+
+
+        vscrollbar = ttk.Scrollbar(tf, orient=VERTICAL)
         self.vscrollbar = vscrollbar
-        vscrollbar.pack(fill=Y, side=RIGHT, expand=FALSE)
+        vscrollbar.pack(fill=Y, expand=True)
         canvas = Canvas(self, bd=0, highlightthickness=0,
                            yscrollcommand=vscrollbar.set)
         self.canvas = canvas

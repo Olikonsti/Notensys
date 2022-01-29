@@ -1,15 +1,45 @@
 {
     "subjects": [
+        "Sozialkunde",
+        "Geschichte/Sozi",
+        "GeschichteTEST",
         "Mathe"
     ],
     "grades": {
         "Mathe": {
             "small": {
-                "ausfrage": 13,
-                "ex": 14
+                "ex": 14,
+                "ausfrage": 14
             },
             "big": {},
             "NBT": {}
+        },
+        "Sozialkunde": {
+            "small": {
+                "yee": 1
+            },
+            "big": {},
+            "NBT": {
+                "is_sk": true
+            }
+        },
+        "Geschichte/Sozi": {
+            "small": {},
+            "big": {
+                "KOMBI": 3.67
+            },
+            "NBT": {
+                "sk_gs_kombi": true
+            }
+        },
+        "GeschichteTEST": {
+            "small": {
+                "ex": 5
+            },
+            "big": {},
+            "NBT": {
+                "is_ges": true
+            }
         }
     }
 }

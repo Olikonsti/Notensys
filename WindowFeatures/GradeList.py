@@ -4,12 +4,15 @@ from Utils.tkdarktitle import *
 from Utils.VerticalScrolledFrame import *
 
 from WindowFeatures.GradeListElement import *
+from WindowFeatures.HeadlineLabel import *
 
-class GradeList(ttk.LabelFrame):
+class GradeList(ttk.Frame):
     def __init__(self, parent, text, grades, subject, notensys, mode):
-        super().__init__(parent, text=text, height=100)
+        super().__init__(parent, height=100)
         self.parent = parent
         self.notensys = notensys
+
+        HeadlineLabel(parent, text=text).pack(anchor=NW, padx=5, pady=(5, 0))
 
         self.pack(fill=BOTH, expand=True, padx=5, pady=5)
         self.pack_propagate(False)
@@ -48,7 +51,7 @@ class GradeList(ttk.LabelFrame):
         self.win.grab_set()
         self.win.focus_force()
         self.win.iconbitmap("DATA/icon.ico")
-        self.win.title("Note hinzufügen")
+        self.win.title("Note ändern")
         self.win.resizable(False, False)
         dark_title_bar(self.win)
         self.win.geometry("250x170")

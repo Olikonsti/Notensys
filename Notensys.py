@@ -14,8 +14,8 @@ class Notensys():
         self.DATA = "DATA"
         if web_mode:
             self.DATA = "/home/pi/Desktop/server/NotensysBackend/DATA"
-        self.version = "4.2"
-        self.version_date = "28.01.2022"
+        self.version = "5.0"
+        self.version_date = "29.01.2022"
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()
 
@@ -118,8 +118,22 @@ class Notensys():
 
     def rem_subject(self, name):
         if name != None:
-            self.save["subjects"].remove(name)
-            del self.save["grades"][name]
+
+            if "sk_gs_kombi" in self.save["grades"][name]["NBT"]:
+                self.save["subjects"].remove(name)
+                del self.save["grades"][name]
+
+                # convert Kombi subsubjects to normal subjects
+                for subj in self.save["grades"]:
+                    if "is_ges" in self.save["grades"][subj]["NBT"]:
+                        del self.save["grades"][subj]["NBT"]["is_ges"]
+                    elif "is_sk" in self.save["grades"][subj]["NBT"]:
+                        del self.save["grades"][subj]["NBT"]["is_sk"]
+
+
+            else:
+                self.save["subjects"].remove(name)
+                del self.save["grades"][name]
         self.window.subject_overview.redraw()
 
     def rename_subject(self, old, new, redraw=True):
@@ -167,7 +181,10 @@ class Notensys():
         grade_count = 0
         for i in self.save["grades"][subject]["big"]:
             grade_count += 1
-            grade_sum += self.save["grades"][subject]["big"][i]
+            try:
+                grade_sum += self.save["grades"][subject]["big"][i]
+            except:
+                avg = "NA"
         try:
             avg_big = grade_sum / grade_count
         except:

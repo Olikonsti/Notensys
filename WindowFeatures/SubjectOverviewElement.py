@@ -1,11 +1,15 @@
 from WindowFeatures.GradeEditor import *
-from WindowFeatures.FourGradeEditor import *
 
 
 class SubjectOverviewElement(Frame):
-    def __init__(self, subject_overview, subject, notensys):
-        super().__init__(subject_overview.scrollarea.interior, highlightthickness=1)
+    def __init__(self, subject_overview, subject, notensys, is_in_kombi=False):
+        if is_in_kombi:
+            super().__init__(subject_overview.interior, highlightthickness=1)
+        else:
+            super().__init__(subject_overview.scrollarea.interior, highlightthickness=1)
         self.selected = False
+        self.is_kombi = False
+        self.is_in_kombi = is_in_kombi
         self.notensys = notensys
         self.window = notensys.window
         self.subject_overview = subject_overview
@@ -33,6 +37,9 @@ class SubjectOverviewElement(Frame):
         self.pack(fill=X, pady=2, padx=(5, 1))
         self.deselect()
 
+    def deselect_items(self):
+        pass
+
     def toggle_select(self, event=None):
         if self.selected:
             self.deselect()
@@ -46,31 +53,48 @@ class SubjectOverviewElement(Frame):
             pass
         self.subject_attributes = self.window.subject_attributes
         for i in self.subject_overview.subjects_displayed:
-            i.deselect()
-        self.subject_overview.selected = self
+            if not i.is_kombi:
+                i.deselect()
+            if not self.is_in_kombi:
+                i.deselect_items()
+            if i.is_in_kombi:
+                for i in self.window.subject_overview.subjects_displayed:
+                    if not i.is_kombi:
+                        i.deselect()
+
+        if not self.is_in_kombi:
+            self.subject_overview.selected = self
+
         self.selected = True
         self.editMenu(self.subject_attributes.interior,)
-        self.subject_name.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
-        self.point_average.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
-        self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color_selected, highlightcolor=self.notensys.highlight_color_selected, highlightthickness=1)
+        try:
+            self.subject_name.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
+            self.point_average.config(bg=self.notensys.bg_select, fg=self.notensys.text_color)
+        except:
+            pass
+        try:
+            self.config(bg=self.notensys.bg_select, highlightbackground=self.notensys.highlight_color_selected, highlightcolor=self.notensys.highlight_color_selected, highlightthickness=1)
+        except:
+            pass
 
     def deselect(self):
-        if self.window.expanded:
-            self.window.change_geometry_width(-260)
-            self.window.expanded = False
         try:
             self.notensys.window.active_grade_editor.destroy()
         except:
             pass
-        self.subject_overview.selected = None
+        if not self.is_in_kombi:
+            self.subject_overview.selected = None
         try:
             self.window.subject_attributes.clear()
         except:
             pass
         self.selected = False
-        self.subject_name.config(bg=self.notensys.bg_color)
-        self.point_average.config(bg=self.notensys.bg_color)
-        self.config(bg=self.notensys.bg_color, highlightbackground=self.notensys.highlight_color, highlightcolor=self.notensys.highlight_color)
+        try:
+            self.subject_name.config(bg=self.notensys.bg_color)
+            self.point_average.config(bg=self.notensys.bg_color)
+            self.config(bg=self.notensys.bg_color, highlightbackground=self.notensys.highlight_color, highlightcolor=self.notensys.highlight_color)
+        except:
+            pass
 
     def editMenu(self, parent):
 
@@ -86,10 +110,7 @@ class SubjectOverviewElement(Frame):
         self.apply_btn = ttk.Button(btn_frame, text="✔", command=self.upd_data)
         self.apply_btn.pack(side=LEFT, padx=(5, 5), pady=5)
 
-        if "ist_geschichte" in self.notensys.save["grades"][self.subject]["NBT"]:
-            FourGradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
-        else:
-            GradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
+        GradeEditor(self.window.bottom_right_pane, self.subject, self.notensys)
 
 
 
