@@ -6,6 +6,10 @@ class SplashScreen(Tk):
         super().__init__()
         self.notensys = notensys
         self.overrideredirect(True)
+
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        self.geometry(f"600x400+{int(screen_width / 2) - 300}+{int(screen_height / 2) - 150}")
         color = "#1c1c1c"
         self.config(bg=color)
         try:
@@ -38,12 +42,7 @@ class SplashScreen(Tk):
         label.pack(expand=True, fill=BOTH)
         self.after(1, update, 0)
 
-        screen_width = self.winfo_screenwidth()
-        screen_height = self.winfo_screenheight()
-
         self.config(bg=color)
-
-        self.geometry(f"600x400+{int(screen_width/2)-300}+{int(screen_height/2)-150}")
 
         self.text = Label(self, text="Notensys", font="SegoeUI 30", bg=color, fg="#afb1b3")
         self.text.pack(pady=10)

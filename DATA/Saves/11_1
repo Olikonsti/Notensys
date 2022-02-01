@@ -1,0 +1,45 @@
+{
+    "subjects": [
+        "Geschichte/Sozi",
+        "Mathe",
+        "ges",
+        "soz"
+    ],
+    "grades": {
+        "Mathe": {
+            "small": {
+                "ausfrage": 13,
+                "ex": 14
+            },
+            "big": {},
+            "NBT": {}
+        },
+        "ges": {
+            "small": {
+                "4": 4
+            },
+            "big": {},
+            "NBT": {
+                "is_ges": true
+            }
+        },
+        "soz": {
+            "small": {
+                "5": 55
+            },
+            "big": {},
+            "NBT": {
+                "is_sk": true
+            }
+        },
+        "Geschichte/Sozi": {
+            "small": {},
+            "big": {
+                "KOMBI": 21.0
+            },
+            "NBT": {
+                "sk_gs_kombi": true
+            }
+        }
+    }
+}

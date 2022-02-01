@@ -3,14 +3,13 @@ from tkinter import *
 import tkinter.ttk as ttk
 import shutil
 from Utils.tkdarktitle import *
+from Utils.BlurEnabler import *
 
 # settings dict map
 """
 0:  Save path
 1:  sorting mode
 2: Theme DARK/LIGHT
-
-
 """
 
 
@@ -25,6 +24,13 @@ class Settings(Toplevel):
 
         if window.notensys.dark:
             dark_title_bar(self)
+        if window.notensys.dark:
+            self.config(bg="#1c1c1c")
+            if window.blur_enabled:
+                try:
+                    enable_blur(self)
+                except:
+                    pass
 
         self.geometry("500x300")
         self.iconbitmap("DATA/icon.ico")

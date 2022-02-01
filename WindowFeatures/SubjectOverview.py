@@ -30,10 +30,10 @@ class SubjectOverview(ttk.LabelFrame):
 
         avg = self.notensys.calculate_whole_average()
         self.average_label = ttk.Label(self.topbar, text=f"Schnitt: {avg}")
-        #self.average_label.pack(side=LEFT, padx=3)
+        self.average_label.pack(side=LEFT, padx=3)
 
         self.average_color_indicator = ColorIndicator(self.topbar, avg)
-        #self.average_color_indicator.pack(side=LEFT, padx=4)
+        self.average_color_indicator.pack(side=LEFT, padx=4)
 
         self.scrollarea = VerticalScrolledFrame(self)
         self.scrollarea.pack(expand=True, fill=BOTH, padx=(0, 5))
@@ -46,7 +46,7 @@ class SubjectOverview(ttk.LabelFrame):
         self.average_label.config(text=f"Schnitt: {avg}")
         self.average_color_indicator.destroy()
         self.average_color_indicator = ColorIndicator(self.topbar, avg)
-        #self.average_color_indicator.pack(side=LEFT, padx=4)
+        self.average_color_indicator.pack(side=LEFT, padx=4)
 
     def sort_subjects(self, event=None, mode_=None):
         mode = self.sort_var.get()

@@ -1,11 +1,13 @@
 import ctypes as ct
 import time
-from BlurWindow.blurWindow import GlobalBlur
+from BlurWindow.blurWindow import *
 
 def enable_blur(win, dark_mode=True):
+
     global DRAG
     get_parent = ct.windll.user32.GetParent
     HWND = get_parent(win.winfo_id())
+
     DRAG = False
 
     def dragging(event):
@@ -24,14 +26,14 @@ def enable_blur(win, dark_mode=True):
         DRAG = False
 
         if not dark_mode:
-            GlobalBlur(HWND, hexColor="#030202", Dark=True, Acrylic=True)
+            pass
         else:
-            GlobalBlur(HWND, hexColor="#030202", Dark=True, Acrylic=True)
+            GlobalBlur(HWND, hexColor="#03020200", Dark=True, Acrylic=True)
+
 
     win.bind('<Configure>', dragging)
     if not dark_mode:
         print("blur enabler enabled!")
-        GlobalBlur(HWND, hexColor="#030202", Dark=True, Acrylic=True)
     else:
-        GlobalBlur(HWND, hexColor="#030202", Dark=True, Acrylic=True)
+        GlobalBlur(HWND, hexColor="#03020200", Dark=True, Acrylic=True)
     win.blur_enabled = True

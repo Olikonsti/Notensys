@@ -23,6 +23,7 @@ class Window(Tk):
 
         if notensys.dark:
             try:
+                pass
                 dark_title_bar(self)
             except:
                 print("could not enable dark title bar on main win")
@@ -86,7 +87,7 @@ class Window(Tk):
         self.subject_attributes = SubjectAttributes(self.rightPane, self.notensys)
         self.subject_attributes.pack(fill=BOTH, expand=True, padx=5, pady=(0, 5))
 
-        self.bottom_right_pane = Frame(self.rightPane, width=260, height=1000)
+        self.bottom_right_pane = Frame(self.rightPane, width=270, height=1000)
         self.bottom_right_pane.pack_propagate(False)
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 

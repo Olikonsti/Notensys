@@ -156,6 +156,9 @@ class Notensys():
         no_grade_subjects = 0
         for i in self.save["subjects"]:
             c = self.calculate_average(i)
+            if "is_sk" in self.save["grades"][i]["NBT"] or "is_ges" in self.save["grades"][i]["NBT"]:
+                no_grade_subjects += 1
+                continue
             if c != '   -':
                 sum += float(self.calculate_average(i))
             else:

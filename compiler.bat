@@ -1,1 +1,1 @@
-pyinstaller -w --icon=DATA/icon.ico main.py
+pyinstaller --icon=DATA/icon.ico main.py

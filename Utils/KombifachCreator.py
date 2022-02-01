@@ -22,7 +22,7 @@ class KombifachCreator(Toplevel):
 
         self.iconbitmap("DATA/icon.ico")
         self.title("Geschichte/Sozi kombinieren")
-        self.geometry("400x300")
+        self.geometry("420x300")
 
         if window.notensys.dark:
             self.config(bg="#1c1c1c")

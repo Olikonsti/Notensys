@@ -5,7 +5,7 @@ from WindowFeatures.HeadlineLabel import HeadlineLabel
 
 class SubjectAttributes(ttk.Frame):
     def __init__(self, window, notensys):
-        super().__init__(window, width=300, height=200)
+        super().__init__(window, width=390, height=200)
         HeadlineLabel(self, text="Attribute").pack(anchor=W)
         self.interior = Frame(self)
         self.interior.pack(expand=True, fill=BOTH)
