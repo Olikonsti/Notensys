@@ -8,6 +8,8 @@ def enable_blur(win, dark_mode=True):
     get_parent = ct.windll.user32.GetParent
     HWND = get_parent(win.winfo_id())
 
+    color = "#03020233"
+
     DRAG = False
 
     def dragging(event):
@@ -28,12 +30,12 @@ def enable_blur(win, dark_mode=True):
         if not dark_mode:
             pass
         else:
-            GlobalBlur(HWND, hexColor="#03020200", Dark=True, Acrylic=True)
+            GlobalBlur(HWND, hexColor=color, Dark=True, Acrylic=True)
 
 
     win.bind('<Configure>', dragging)
     if not dark_mode:
         print("blur enabler enabled!")
     else:
-        GlobalBlur(HWND, hexColor="#03020200", Dark=True, Acrylic=True)
+        GlobalBlur(HWND, hexColor=color, Dark=True, Acrylic=True)
     win.blur_enabled = True

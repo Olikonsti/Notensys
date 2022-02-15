@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 import shutil
 from Utils.tkdarktitle import *
 from Utils.BlurEnabler import *
+from WindowFeatures.HeadlineLabel import *
 
 # settings dict map
 """
@@ -13,34 +14,33 @@ from Utils.BlurEnabler import *
 """
 
 
-class Settings(Toplevel):
+class Settings(Frame):
     def __init__(self, window):
         super().__init__(window)
 
         self.settings_save = window.notensys.settings_save.copy()
-        self.resizable(False, False)
-        self.grab_set()
-        self.focus_force()
+        #self.resizable(False, False)
+        #self.grab_set()
+        #self.focus_force()
 
-        if window.notensys.dark:
-            dark_title_bar(self)
-        if window.notensys.dark:
-            self.config(bg="#1c1c1c")
-            if window.blur_enabled:
-                try:
-                    enable_blur(self)
-                except:
-                    pass
-
-        self.geometry("500x300")
-        self.iconbitmap("DATA/icon.ico")
-        self.title("Notensys Einstellungen")
+        #self.geometry("500x300")
+        #self.iconbitmap("DATA/icon.ico")
+        #self.title("Notensys Einstellungen")
 
         self.window = window
         self.window.settings_open = True
         self.window.settings_instance = self
 
-        self.protocol("WM_DELETE_WINDOW", self.exit)
+        #self.protocol("WM_DELETE_WINDOW", self.exit)
+
+        top = Frame(self)
+        top.pack(fill=X)
+
+        self.back_btn = ttk.Button(top, text="<", command=self.exit)
+        self.back_btn.pack(padx=10, pady=10, side=LEFT)
+
+        self.headline = HeadlineLabel(top, text="Einstellungen")
+        self.headline.pack(side=LEFT)
 
         self.apply_btn = ttk.Button(self, text="Übernehmen", command=self.apply)
         self.apply_btn.pack(side=BOTTOM, anchor=NE, padx=25, pady=15)
@@ -62,6 +62,16 @@ class Settings(Toplevel):
         self.blur_swtch = ttk.Checkbutton(self, text="Transparenz (win11 acrylic)", style="Switch.TCheckbutton",
                                              variable=self.blur_var)
         self.blur_swtch.pack(anchor=W)
+
+        self.config(width=self.window.winfo_width(), height=self.window.winfo_height())
+        self.pack_propagate(False)
+        self.place(x=0, y=0)
+
+        self.upd()
+
+    def upd(self):
+        self.config(width=self.window.winfo_width(), height=self.window.winfo_height())
+        self.after(100, self.upd)
 
     def fill_default_settings(self, notensys):
         notensys.settings_save["0"] = "DATA/Saves"

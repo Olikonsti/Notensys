@@ -14,8 +14,9 @@ class Notensys():
         self.DATA = "DATA"
         if web_mode:
             self.DATA = "/home/pi/Desktop/server/NotensysBackend/DATA"
-        self.version = "5.3"
+        self.version = "5.4"
         self.version_date = "01.02.2022"
+
         self.splash_screen = SplashScreen(self)
         self.splash_screen.mainloop()
 
@@ -85,21 +86,36 @@ class Notensys():
         self.year_selector = YearSelector(self)
         self.selected_year = self.year_selector.get_selection()
         self.save = self.save_manager.load(self.selected_year)
+        try:
+            self.window.kccs_client.logout()
+        except:
+            pass
         self.window = Window(self)
 
     def save_year_exit(self):
         print("Saving...")
         self.save_manager.save(self.selected_year, self.save)
         self.settings_save_manager.save()
+        try:
+            self.window.kccs_client.logout()
+        except:
+            pass
         raise SystemExit
 
     def exit_no_save(self):
+        try:
+            self.window.kccs_client.logout()
+        except:
+            pass
         raise SystemExit
 
     def save_year(self):
         print("Saving...")
         self.save_manager.save(self.selected_year, self.save)
         self.settings_save_manager.save()
+
+    def msg(self, text, time=5):
+        Popup(self.window, text, time=time)
 
 
     def add_subject(self):
@@ -163,7 +179,10 @@ class Notensys():
                 sum += float(self.calculate_average(i))
             else:
                 no_grade_subjects += 1
-        sum = sum/(len(self.save["subjects"])-no_grade_subjects)
+        try:
+            sum = sum/(len(self.save["subjects"])-no_grade_subjects)
+        except:
+            pass
         return round(sum, 2)
 
 

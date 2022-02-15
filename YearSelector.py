@@ -47,7 +47,8 @@ class YearSelector(Tk):
 
         self.years = self.notensys.save_manager.list_saves()
         self.option_var = StringVar(self)
-        self.selector = ttk.OptionMenu(self, self.option_var, self.years[0], *self.years)
+
+        self.selector = ttk.OptionMenu(self, self.option_var, self.notensys.save_manager.get_last_modified(), *self.years)
         self.selector.pack(side=LEFT, padx=(20,0), pady=20)
 
         self.apply_btn = ttk.Button(self, text="Weiter", command=self.exit)

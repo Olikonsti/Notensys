@@ -6,7 +6,10 @@ from WindowFeatures.TitleBarMenuItem import *
 from WindowFeatures.SubjectOverview import *
 from WindowFeatures.SubjectAttributes import *
 from WindowFeatures.HeadlineLabel import HeadlineLabel
+from WindowFeatures.Popup import *
 from Utils.BlurEnabler import enable_blur
+import sys
+from client.client import *
 
 from Utils.KombifachCreator import *
 
@@ -17,9 +20,19 @@ class Window(Tk):
     def __init__(self, notensys):
         super().__init__()
         self.notensys = notensys
-        self.title("Notensys Übersicht")
+        self.title("Notensys")
         self.geometry("650x680")
         self.config(bg=self.notensys.bg_color_blur)
+
+        self.notensys.window = self
+
+        def when_connected():
+            self.notensys.msg("OnlineDienste: Verbunden", time=2)
+            self.kccs_client.login("konst", "test")
+            self.kccs_client.send("test", ("yee", 2), "KCCS")
+
+        #self.kccs_client = KCCSClient(host="localhost", app="Notensys", when_connected=when_connected)
+
 
         if notensys.dark:
             try:
@@ -34,8 +47,6 @@ class Window(Tk):
                 print("blur enabled!!!")
             except:
                 print("failed to start main win blur")
-
-        self.expanded = False
 
         self.style = ttk.Style(self)
         if self.notensys.web_mode:
@@ -70,14 +81,10 @@ class Window(Tk):
         TitleBarItem(self.menubar_frame, notensys, "Jahr ändern", self.change_year)
         TitleBarItem(self.menubar_frame, notensys, "Über Notensys", self.open_about)
 
-        self.subj_menu_btn = TitleBarMenuItem(self.menubar_frame, notensys, "Kombi einrichten")
-
-        subj_menu = Menu(self.subj_menu_btn, tearoff=0)
-        self.subj_menu_btn["menu"] = subj_menu
-        subj_menu.add_command(label="Geschichte/Sozi erstellen", command=self.open_kombifachcreator)
-
-        self.update()
-        self.notensys.window = self
+        self.toolmenu = TitleBarMenuItem(self.menubar_frame, notensys, "Werkzeuge")
+        toolmenu = Menu(self.toolmenu, tearoff=0)
+        self.toolmenu["menu"] = toolmenu
+        toolmenu.add_command(label="Ges/Sozi Kombi einrichten", command=self.open_kombifachcreator)
 
         self.subject_overview = SubjectOverview(self, notensys)
 
@@ -92,7 +99,6 @@ class Window(Tk):
         self.bottom_right_pane.pack(fill=BOTH, expand=True)
 
         self.protocol("WM_DELETE_WINDOW", self.notensys.save_year_exit)
-
         self.update()
 
     def disable_blur(self):

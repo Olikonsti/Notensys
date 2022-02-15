@@ -13,6 +13,15 @@ class SaveManager():
         f.write(str(json.dumps(data, indent=4)))
         f.close()
 
+    def get_last_modified(self):
+        folder = self.list_saves()
+        biggest = folder[0]
+        biggest_time = os.path.getmtime(self.savefolder + "/" + biggest)
+        for i in folder:
+            if os.path.getmtime(self.savefolder + "/" + i) > biggest_time:
+                biggest = i
+        return biggest
+
     def load(self, name):
         f = open(f"{self.savefolder}/{name}", "r")
         data = f.read()

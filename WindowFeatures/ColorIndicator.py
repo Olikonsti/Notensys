@@ -8,16 +8,16 @@ class ColorIndicator(Frame):
         try:
             if points < 1:
                 self.config(bg="#ad0000")
-            elif points < 4:
+            elif points < 3.5:
                 self.config(bg="#ff4d00")
-            elif points < 7:
+            elif points < 6.5:
                 self.config(bg="#ff8c00")
-            elif points < 10:
+            elif points < 9.5:
                 self.config(bg="#e6dd32")
-            elif points < 13:
-                self.config(bg="#abf740")
+            elif points < 12.5:
+                self.config(bg="#9beb23")
             else:
-                self.config(bg="#00bf03")
+                self.config(bg="#289100")
         except:
             self.config(bg="grey")
 
