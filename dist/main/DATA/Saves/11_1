@@ -1,0 +1,159 @@
+{
+    "subjects": [
+        "Physik W-Seminar",
+        "Informatik",
+        "Kunst",
+        "Mathe",
+        "Fotografie",
+        "Physik",
+        "Geschichte",
+        "Wirtschaft",
+        "Religion",
+        "Geschichte/Sozi",
+        "Deutsch",
+        "Sozialkunde",
+        "Englisch",
+        "Sport"
+    ],
+    "grades": {
+        "Englisch": {
+            "small": {
+                "Kurzarbeit": 6
+            },
+            "big": {
+                "": 7,
+                "fsdjhjfdoisofds": 6
+            },
+            "NBT": {}
+        },
+        "Informatik": {
+            "small": {
+                "Ex1": 15
+            },
+            "big": {
+                "1.Klausur": 15
+            },
+            "NBT": {}
+        },
+        "Wirtschaft": {
+            "small": {
+                "Ex1": 3,
+                "Ausfrage1": 13
+            },
+            "big": {
+                "Klausur1": 8
+            },
+            "NBT": {}
+        },
+        "Sport": {
+            "small": {
+                "Sprinten": 4,
+                "Weitsprung": 3,
+                "Ausdauerlauf": 1,
+                "Referat": 6,
+                "Kugelsto\u00dfen": 0,
+                "Hochsprung": 2
+            },
+            "big": {},
+            "NBT": {}
+        },
+        "Kunst": {
+            "small": {
+                "H\u00e4nde": 14,
+                "Weish\u00f6hung": 12
+            },
+            "big": {
+                "1.Klausur": 11
+            },
+            "NBT": {}
+        },
+        "Fotografie": {
+            "small": {
+                "1.Fotoabgaben": 13,
+                "Vertrautes Fotografieren": 12
+            },
+            "big": {
+                "Klausur": 10
+            },
+            "NBT": {}
+        },
+        "Deutsch": {
+            "small": {
+                "Lekt\u00fcretest": 7
+            },
+            "big": {
+                "1.Klausur": 8
+            },
+            "NBT": {}
+        },
+        "Religion": {
+            "small": {
+                "Kurzarbeit": 9,
+                "Gruppenarbeit": 10
+            },
+            "big": {
+                "1.Klausur": 6
+            },
+            "NBT": {}
+        },
+        "Sozialkunde": {
+            "small": {
+                "Unterrichtsbeitrag": 9
+            },
+            "big": {
+                "1.Klausur": 4
+            },
+            "NBT": {
+                "is_sk": true
+            }
+        },
+        "Geschichte": {
+            "small": {
+                "Unterrichtsbeitrag": 9
+            },
+            "big": {
+                "1.Klausur": 7
+            },
+            "NBT": {
+                "is_ges": true
+            }
+        },
+        "Mathe": {
+            "small": {
+                "Zettelex1": 14,
+                "Ex1": 13,
+                "Zettelex2": 14
+            },
+            "big": {
+                "1.Klausur": 9
+            },
+            "NBT": {}
+        },
+        "Physik": {
+            "small": {
+                "Ex": 13,
+                "Unterrichtsbeitrag": 13
+            },
+            "big": {
+                "1.Klausur": 8
+            },
+            "NBT": {}
+        },
+        "Geschichte/Sozi": {
+            "small": {},
+            "big": {
+                "KOMBI": 7.67
+            },
+            "NBT": {
+                "sk_gs_kombi": true
+            }
+        },
+        "Physik W-Seminar": {
+            "small": {
+                "Referat": 15
+            },
+            "big": {},
+            "NBT": {}
+        }
+    }
+}
