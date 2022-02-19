@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Notensys"
-#define MyAppVersion "5.3"
+#define MyAppVersion "5.4"
 #define MyAppPublisher "kksv"
 #define MyAppURL "https://ksite.ddns.net"
 #define MyAppExeName "notensys.exe"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 OutputDir=C:\Users\konst\Desktop
-OutputBaseFilename=NotensysInstaller_5.3
+OutputBaseFilename=NotensysInstaller_5.4
 SetupIconFile=Z:\Programming\Programming-Python\Programs\Notensys\DATA\icon.ico
 Compression=lzma
 SolidCompression=yes
